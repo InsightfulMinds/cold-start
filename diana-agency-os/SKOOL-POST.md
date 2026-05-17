@@ -1,8 +1,7 @@
 # Skool Post — Week 4 Competition
 
 ## Repo link
-https://github.com/seanvargas/cold-start/tree/main/diana-agency-os/agency-system
-(update with actual GitHub username after push)
+https://github.com/InsightfulMinds/cold-start/tree/main/diana-agency-os/agency-system
 
 ## 100-word writeup (paste this into the comment)
 
