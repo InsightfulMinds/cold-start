@@ -744,8 +744,7 @@
       text-align: left;
     }
 
-    .test-prompt::before {
-      content: '> ';
+    .test-prompt .prompt-prefix {
       opacity: 0.5;
     }
 
@@ -799,9 +798,9 @@
 
   <div class="hero" id="hero">
     <div class="shell">
-      <div class="hero-badge">Clief Notes Weekly Comp #4</div>
-      <h1>Diana's <span>Agency OS</span></h1>
-      <p class="hero-sub">A Spanish-speaking family calls. Someone scrambles to rewrite the email in their language. It works &mdash; but it shouldn't be a scramble. Five Claude-ready folders. One handoff schema. Every specialist already knows the language, the owner, and where to route if things break.</p>
+      <div class="hero-badge">Clief Notes Weekly Comp #4 &mdash; Diana's Agency OS</div>
+      <h1>Five AI Specialists.<br><span>One Handoff Contract.</span></h1>
+      <p class="hero-sub">A bilingual real estate OS that routes deals, detects language, and knows where to send the problem when things break. Five Claude folders. One schema. No logins.</p>
       <a href="https://github.com/InsightfulMinds/cold-start/tree/main/diana-agency-os/agency-system" class="hero-cta">
         Clone &amp; Run in 5 Minutes &rarr;
       </a>
@@ -895,8 +894,8 @@
           <p>"Great to connect — here's what's next. I've pulled three properties in your budget range near Mueller. Let's schedule a showing this Saturday."</p>
           <div class="note">Subject: Great to connect, Maria — here's what's next</div>
         </div>
-        <div class="lang-card">
-          <h4>Spanish Draft</h4>
+        <div class="lang-card" style="border-color: var(--teal);">
+          <h4 style="color: var(--teal);">Spanish Draft</h4>
           <p>"Mucho gusto en conectar — esto es lo que sigue. Encontr&eacute; tres propiedades en su rango de presupuesto cerca de Mueller. Podemos agendar una visita este s&aacute;bado."</p>
           <div class="note">Asunto: Bienvenida, Mar&iacute;a — esto es lo que sigue</div>
         </div>
@@ -1094,6 +1093,10 @@
     if (prompt) {
       const fullText = prompt.textContent.trim();
       prompt.textContent = '';
+      const prefix = document.createElement('span');
+      prefix.className = 'prompt-prefix';
+      prefix.textContent = '> ';
+      prompt.appendChild(prefix);
       const cursor = document.createElement('span');
       cursor.className = 'cursor';
       prompt.appendChild(cursor);
