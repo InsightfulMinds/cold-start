@@ -1232,6 +1232,230 @@
       white-space: nowrap;
     }
 
+    /* Dashboard mockup */
+    .dash-frame {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #05070a;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+      margin-top: 32px;
+    }
+
+    .dash-topbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .dash-title {
+      margin-left: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .dash-clock {
+      margin-left: auto;
+      color: var(--faint);
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 11px;
+    }
+
+    .dash-body {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      min-height: 420px;
+    }
+
+    .dash-sidebar {
+      padding: 14px 0;
+      border-right: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel) 60%, transparent);
+    }
+
+    .dash-nav-item {
+      padding: 10px 16px;
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: default;
+      transition: all 0.2s;
+      border-left: 2px solid transparent;
+    }
+
+    .dash-nav-item.active {
+      color: var(--teal);
+      background: var(--teal-soft);
+      border-left-color: var(--teal);
+    }
+
+    .dash-main {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .dash-pipeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .pipe-stage {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pipe-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-left: 3px solid;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .pipe-count {
+      display: grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--panel-2);
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .pipe-card {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      font-size: 12px;
+    }
+
+    .pipe-card strong {
+      display: block;
+      color: var(--text);
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .pipe-card span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .pipe-card.highlight {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .pipe-card.done {
+      border-color: var(--green);
+      opacity: 0.7;
+    }
+
+    .pipe-card.faint {
+      opacity: 0.5;
+    }
+
+    .pipe-risk {
+      margin-top: 6px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .dash-bottom {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .dash-activity, .dash-agents {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--panel) 60%, transparent);
+    }
+
+    .dash-section-title {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--faint);
+      margin-bottom: 10px;
+    }
+
+    .activity-line {
+      padding: 6px 0;
+      font-size: 11px;
+      color: var(--muted);
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 40%, transparent);
+    }
+
+    .activity-line:last-child { border-bottom: none; }
+
+    .act-time {
+      color: var(--faint);
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 10px;
+      margin-right: 8px;
+    }
+
+    .act-agent {
+      font-weight: 700;
+    }
+
+    .agent-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .agent-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .agent-status {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--faint);
+    }
+
+    .agent-status.active-s {
+      color: var(--green);
+      animation: status-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes status-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
     /* Floating nav dots */
     .nav-dots {
       position: fixed;
@@ -1456,6 +1680,10 @@
       .ladder-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .aios-console { grid-template-columns: 1fr; }
       .control-pad, .connector-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .dash-body { grid-template-columns: 1fr; }
+      .dash-sidebar { display: none; }
+      .dash-pipeline { grid-template-columns: repeat(2, 1fr); }
+      .dash-bottom { grid-template-columns: 1fr; }
       section { padding: 56px 0; }
       .hero h1 { font-size: 32px; }
       .test-prompt { font-size: 12px; padding: 16px; }
@@ -1470,6 +1698,7 @@
       section h2 { font-size: 24px; }
       .arch-grid { grid-template-columns: 1fr; }
       .ladder-grid, .drop-grid, .state-grid, .snapshot-body { grid-template-columns: 1fr; }
+      .dash-pipeline { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -1483,6 +1712,7 @@
     <button class="nav-dot" data-target="bilingual" data-label="Bilingual" aria-label="Jump to Bilingual"></button>
     <button class="nav-dot" data-target="build" data-label="Build" aria-label="Jump to Build"></button>
     <button class="nav-dot" data-target="edge" data-label="Edge" aria-label="Jump to Edge"></button>
+    <button class="nav-dot" data-target="dashboard" data-label="Dashboard" aria-label="Jump to Dashboard"></button>
     <button class="nav-dot" data-target="deploy" data-label="Deploy" aria-label="Jump to Deploy"></button>
     <button class="nav-dot" data-target="output" data-label="Output" aria-label="Jump to Output"></button>
     <button class="nav-dot" data-target="ladder" data-label="Ladder" aria-label="Jump to Ladder"></button>
@@ -1742,6 +1972,111 @@
           <div class="health-row">
             <strong>Recovery</strong>
             <span>When the lender slips, the <code>back_to</code> field already routes fallback comps &mdash; before anyone asks.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard Visual -->
+  <section class="reveal" id="dashboard">
+    <div class="shell">
+      <p class="section-label">Live Surface</p>
+      <h2>Not a static folder. A running control surface.</h2>
+      <p class="section-desc">Every specialist reports state. Every deal has a health score. The dashboard shows what's moving, what's stalled, and what needs a human decision — without exposing the machinery underneath.</p>
+
+      <div class="dash-frame">
+        <div class="dash-topbar">
+          <span class="demo-dot" style="background:#fb7185;"></span>
+          <span class="demo-dot" style="background:#e8a946;"></span>
+          <span class="demo-dot" style="background:#22c55e;"></span>
+          <span class="dash-title">Diana OS &mdash; Deal Control</span>
+          <span class="dash-clock" id="dashClock"></span>
+        </div>
+
+        <div class="dash-body">
+          <div class="dash-sidebar">
+            <div class="dash-nav-item active">&#9654; Pipeline</div>
+            <div class="dash-nav-item">&#9881; Specialists</div>
+            <div class="dash-nav-item">&#9993; Comms Log</div>
+            <div class="dash-nav-item">&#128202; Analytics</div>
+            <div class="dash-nav-item">&#9881; Settings</div>
+          </div>
+
+          <div class="dash-main">
+            <div class="dash-pipeline">
+              <div class="pipe-stage">
+                <div class="pipe-header" style="border-color: var(--cyan);">
+                  <span class="pipe-count">3</span>
+                  <span>New Leads</span>
+                </div>
+                <div class="pipe-card">
+                  <strong>Garc&iacute;a Family</strong>
+                  <span>$400K &middot; Mueller &middot; <em style="color:var(--teal);">es</em></span>
+                </div>
+                <div class="pipe-card">
+                  <strong>Johnson, M.</strong>
+                  <span>$280K &middot; Round Rock</span>
+                </div>
+                <div class="pipe-card faint">
+                  <strong>Chen, L.</strong>
+                  <span>$550K &middot; Westlake</span>
+                </div>
+              </div>
+              <div class="pipe-stage">
+                <div class="pipe-header" style="border-color: var(--accent);">
+                  <span class="pipe-count">2</span>
+                  <span>Qualified</span>
+                </div>
+                <div class="pipe-card">
+                  <strong>Davis, R.</strong>
+                  <span>Pre-approved &middot; $320K</span>
+                </div>
+                <div class="pipe-card">
+                  <strong>Ortiz, S.</strong>
+                  <span>$475K &middot; <em style="color:var(--teal);">es</em> &middot; August deadline</span>
+                </div>
+              </div>
+              <div class="pipe-stage">
+                <div class="pipe-header" style="border-color: var(--teal);">
+                  <span class="pipe-count">1</span>
+                  <span>Active Deal</span>
+                </div>
+                <div class="pipe-card highlight">
+                  <strong>Reyes, A.</strong>
+                  <span>Under contract &middot; Appraisal pending</span>
+                  <div class="pipe-risk">&#9888; Lender delay: 10d</div>
+                </div>
+              </div>
+              <div class="pipe-stage">
+                <div class="pipe-header" style="border-color: var(--green);">
+                  <span class="pipe-count">1</span>
+                  <span>Closing</span>
+                </div>
+                <div class="pipe-card done">
+                  <strong>Nguyen, T.</strong>
+                  <span>Close date: May 22 &middot; All docs &#10003;</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-bottom">
+              <div class="dash-activity">
+                <div class="dash-section-title">Activity Feed</div>
+                <div class="activity-line"><span class="act-time">9:14a</span> <span class="act-agent" style="color:var(--teal);">Orchestrator</span> routed Garc&iacute;a &rarr; Lead Qualifier (es)</div>
+                <div class="activity-line"><span class="act-time">9:12a</span> <span class="act-agent" style="color:var(--accent);">Client Comms</span> drafted reassurance for Reyes (es)</div>
+                <div class="activity-line"><span class="act-time">9:08a</span> <span class="act-agent" style="color:var(--cyan);">Property Research</span> flagged HOA gap on Ortiz listing</div>
+                <div class="activity-line"><span class="act-time">8:55a</span> <span class="act-agent" style="color:var(--green);">Transaction Coord</span> confirmed Nguyen closing docs complete</div>
+              </div>
+              <div class="dash-agents">
+                <div class="dash-section-title">Specialist Status</div>
+                <div class="agent-row"><span class="agent-dot" style="background:var(--teal);"></span> Orchestrator <span class="agent-status">idle</span></div>
+                <div class="agent-row"><span class="agent-dot" style="background:var(--green);"></span> Lead Qualifier <span class="agent-status active-s">processing</span></div>
+                <div class="agent-row"><span class="agent-dot" style="background:var(--cyan);"></span> Prop Research <span class="agent-status">idle</span></div>
+                <div class="agent-row"><span class="agent-dot" style="background:var(--accent);"></span> Client Comms <span class="agent-status active-s">drafting</span></div>
+                <div class="agent-row"><span class="agent-dot" style="background:var(--rose);"></span> Txn Coord <span class="agent-status">idle</span></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -2120,7 +2455,7 @@
     })();
 
     // Keyboard navigation (Alt + arrow keys between sections)
-    const navSections = ['hero','team','handoff','bilingual','build','edge','deploy','output','ladder','aios','cta'];
+    const navSections = ['hero','team','handoff','bilingual','build','edge','dashboard','deploy','output','ladder','aios','cta'];
     let currentSection = 0;
     document.addEventListener('keydown', e => {
       if (!e.altKey || e.metaKey || e.ctrlKey) return;
@@ -2211,6 +2546,17 @@
         }
       }
     });
+
+    // Dashboard live clock
+    const dashClock = document.getElementById('dashClock');
+    if (dashClock) {
+      function updateClock() {
+        const now = new Date();
+        dashClock.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
+    }
 
     // Voice sample players
     document.querySelectorAll('.voice-play').forEach(btn => {
