@@ -1,0 +1,112 @@
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Define gradients and styles for dark/light theme compatibility -->
+  <defs>
+    <style>
+      .specialist-box { fill: #1e1e1e; stroke: #4a9eff; stroke-width: 2; }
+      .specialist-text { fill: #ffffff; font-family: system-ui, sans-serif; font-size: 14px; font-weight: 600; }
+      .specialist-label { fill: #aaaaaa; font-family: system-ui, sans-serif; font-size: 11px; }
+      .forward-arrow { stroke: #4a9eff; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead-forward); }
+      .return-arrow { stroke: #ff6b6b; stroke-width: 2; fill: none; marker-end: url(#arrowhead-return); stroke-dasharray: 4,4; }
+      .language-flag { font-size: 20px; }
+      .envelope-label { fill: #888888; font-family: system-ui, sans-serif; font-size: 10px; }
+      .case-id { fill: #ffd700; font-family: monospace; font-size: 12px; font-weight: bold; }
+    </style>
+
+    <!-- Forward flow arrow marker -->
+    <marker id="arrowhead-forward" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#4a9eff" />
+    </marker>
+
+    <!-- Return flow arrow marker -->
+    <marker id="arrowhead-return" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#ff6b6b" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="600" y="30" style="font-family: system-ui, sans-serif; font-size: 24px; font-weight: bold; fill: #ffffff; text-anchor: middle;">Diana's Agency OS — Handoff Flow</text>
+
+  <!-- Specialist boxes -->
+
+  <!-- 00_Orchestrator -->
+  <rect class="specialist-box" x="50" y="100" width="160" height="100" rx="8"/>
+  <text class="specialist-text" x="130" y="145" text-anchor="middle">Orchestrator</text>
+  <text class="specialist-label" x="130" y="160" text-anchor="middle">00_intake</text>
+  <text class="case-id" x="130" y="185" text-anchor="middle">case_id</text>
+
+  <!-- 01_Lead Qualifier -->
+  <rect class="specialist-box" x="280" y="100" width="160" height="100" rx="8"/>
+  <text class="specialist-text" x="360" y="145" text-anchor="middle">Lead Qualifier</text>
+  <text class="specialist-label" x="360" y="160" text-anchor="middle">01_qualify</text>
+  <text style="fill: #999999; font-family: system-ui, sans-serif; font-size: 11px;" x="360" y="185" text-anchor="middle">qualification</text>
+
+  <!-- 02_Property Research -->
+  <rect class="specialist-box" x="510" y="100" width="160" height="100" rx="8"/>
+  <text class="specialist-text" x="590" y="145" text-anchor="middle">Property Research</text>
+  <text class="specialist-label" x="590" y="160" text-anchor="middle">02_research</text>
+  <text style="fill: #999999; font-family: system-ui, sans-serif; font-size: 11px;" x="590" y="185" text-anchor="middle">market data</text>
+
+  <!-- 03_Client Communication -->
+  <rect class="specialist-box" x="740" y="100" width="160" height="100" rx="8"/>
+  <text class="specialist-text" x="820" y="145" text-anchor="middle">Client Comms</text>
+  <text class="specialist-label" x="820" y="160" text-anchor="middle">03_comms</text>
+  <text style="fill: #999999; font-family: system-ui, sans-serif; font-size: 11px;" x="820" y="185" text-anchor="middle">messaging</text>
+
+  <!-- 04_Transaction Coordinator -->
+  <rect class="specialist-box" x="970" y="100" width="160" height="100" rx="8"/>
+  <text class="specialist-text" x="1050" y="145" text-anchor="middle">Transaction</text>
+  <text class="specialist-text" x="1050" y="163" text-anchor="middle">Coordinator</text>
+  <text class="specialist-label" x="1050" y="180" text-anchor="middle">04_txn</text>
+  <text style="fill: #999999; font-family: system-ui, sans-serif; font-size: 11px;" x="1050" y="200" text-anchor="middle">docs & close</text>
+
+  <!-- Forward flow arrows (blue, solid) -->
+  <path class="forward-arrow" d="M 210 150 L 280 150"/>
+  <path class="forward-arrow" d="M 440 150 L 510 150"/>
+  <path class="forward-arrow" d="M 670 150 L 740 150"/>
+  <path class="forward-arrow" d="M 900 150 L 970 150"/>
+
+  <!-- Return flow arrows (red, dashed) -->
+  <!-- From Comms back to Research -->
+  <path class="return-arrow" d="M 810 210 Q 700 280 650 210"/>
+  <!-- From Transaction back to Comms -->
+  <path class="return-arrow" d="M 960 180 Q 880 240 880 210"/>
+  <!-- From Research back to Qualifier -->
+  <path class="return-arrow" d="M 510 180 Q 400 250 410 210"/>
+
+  <!-- Language envelope visualization -->
+  <g id="language-envelope">
+    <!-- Envelope icon at midpoint of first handoff -->
+    <rect x="235" y="125" width="40" height="30" fill="none" stroke="#ffcc00" stroke-width="1.5" rx="2"/>
+    <text class="language-flag" x="242" y="153">🌐</text>
+
+    <!-- Language follows through -->
+    <text class="envelope-label" x="245" y="255" text-anchor="middle">[en|es|bilingual]</text>
+    <text class="envelope-label" x="245" y="272" text-anchor="middle">travels with</text>
+    <text class="envelope-label" x="245" y="289" text-anchor="middle">every handoff</text>
+  </g>
+
+  <!-- Handoff fields legend -->
+  <g id="legend">
+    <rect x="50" y="380" width="1100" height="180" fill="#0d0d0d" stroke="#333333" stroke-width="1" rx="4"/>
+
+    <text style="font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; fill: #ffffff;" x="70" y="405">Handoff Envelope (HANDOFF_SCHEMA.md contract)</text>
+
+    <text style="font-family: monospace; font-size: 11px; fill: #aaaaaa;" x="70" y="432">case_id: [DIANA-YYYYMMDD-NNN]  •  from: [folder]  •  to: [folder]  •  back_to: [folder|null]</text>
+    <text style="font-family: monospace; font-size: 11px; fill: #aaaaaa;" x="70" y="450">status: [active|stalled|closed]  •  language: [en|es|bilingual]  •  priority: [normal|urgent]</text>
+
+    <text style="font-family: system-ui, sans-serif; font-size: 11px; fill: #cccccc;" x="70" y="475">Fields:</text>
+    <text style="font-family: system-ui, sans-serif; font-size: 10px; fill: #999999;" x="90" y="492">→ What I Know (confirmed facts)  →  What I Don't Know (open questions)</text>
+    <text style="font-family: system-ui, sans-serif; font-size: 10px; fill: #999999;" x="90" y="508">→ Risks I Flagged (legal, deadline, emotional signals)  →  My Deliverable (files, drafts, summaries)</text>
+
+    <text style="font-family: system-ui, sans-serif; font-size: 11px; fill: #cccccc; font-style: italic;" x="70" y="535">Key Rule: back_to routes work laterally or backward when blocked. case_id never changes.</text>
+  </g>
+
+  <!-- Flow legend -->
+  <g id="flow-legend">
+    <line x1="50" y1="575" x2="100" y2="575" class="forward-arrow"/>
+    <text style="font-family: system-ui, sans-serif; font-size: 11px; fill: #4a9eff;" x="110" y="580">Forward flow (default path)</text>
+
+    <line x1="350" y1="575" x2="400" y2="575" class="return-arrow"/>
+    <text style="font-family: system-ui, sans-serif; font-size: 11px; fill: #ff6b6b;" x="410" y="580">Return/lateral flow (back_to routes)</text>
+  </g>
+</svg>
