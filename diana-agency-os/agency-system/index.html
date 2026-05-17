@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diana's Agency OS — AI Operating System for a Boutique Real Estate Team</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0f14;
+      --surface:   #151820;
+      --border:    #252a36;
+      --accent:    #4f7ef0;
+      --accent2:   #34c98d;
+      --warn:      #e8a84b;
+      --text:      #e4e8f1;
+      --muted:     #7a84a0;
+      --tag-bg:    #1e2330;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 64px 24px 56px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .tagline {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 32px;
+    }
+
+    .badges {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .badge.green { color: var(--accent2); border-color: #1c4a36; }
+    .badge.blue  { color: var(--accent);  border-color: #1e2f5c; }
+
+    /* ── Sections ── */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 56px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-child { border-bottom: none; }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    h2 .label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    /* ── Specialist grid ── */
+    .specialists {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .specialist {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      transition: border-color 0.15s;
+    }
+
+    .specialist:hover { border-color: var(--accent); }
+
+    .spec-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .spec-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .spec-folder {
+      font-size: 11px;
+      color: var(--border);
+      font-family: "SF Mono", "Fira Code", monospace;
+      margin-bottom: 10px;
+    }
+
+    .spec-desc {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* ── Flow diagram ── */
+    .flow {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 24px;
+      overflow-x: auto;
+    }
+
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .flow-row + .flow-row {
+      margin-top: 12px;
+    }
+
+    .node {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-family: "SF Mono", "Fira Code", monospace;
+      white-space: nowrap;
+    }
+
+    .node.orchestrator { border-color: var(--accent); color: var(--accent); }
+    .node.qualifier     { border-color: #5b4af0; color: #a399f5; }
+    .node.research      { border-color: #4f94e0; color: #93c4f5; }
+    .node.comms         { border-color: var(--accent2); color: var(--accent2); }
+    .node.tc            { border-color: var(--warn); color: var(--warn); }
+
+    .arrow {
+      color: var(--border);
+      font-size: 16px;
+      padding: 0 4px;
+    }
+
+    .back-arrow {
+      color: var(--muted);
+      font-size: 12px;
+      font-style: italic;
+      padding: 4px 8px 0;
+      width: 100%;
+    }
+
+    /* ── Design decisions ── */
+    .decisions { display: flex; flex-direction: column; gap: 16px; }
+
+    .decision {
+      display: grid;
+      grid-template-columns: 3px 1fr;
+      gap: 20px;
+    }
+
+    .decision-bar {
+      background: var(--accent);
+      border-radius: 3px;
+    }
+
+    .decision-bar.green { background: var(--accent2); }
+
+    .decision-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .decision-body {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    code {
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 12px;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      color: var(--accent2);
+    }
+
+    /* ── Envelope preview ── */
+    .envelope {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    .env-key   { color: var(--accent); }
+    .env-val   { color: var(--text); }
+    .env-note  { color: var(--muted); }
+    .env-label { color: var(--accent2); font-weight: 600; }
+
+    /* ── Bilingual callout ── */
+    .bilingual-callout {
+      background: linear-gradient(135deg, #0f1c2b 0%, #0d1a14 100%);
+      border: 1px solid #1c4a36;
+      border-radius: 10px;
+      padding: 28px;
+    }
+
+    .bilingual-callout h3 {
+      font-size: 16px;
+      color: var(--accent2);
+      margin-bottom: 10px;
+    }
+
+    .bilingual-callout p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── Onboarding steps ── */
+    .steps { display: flex; flex-direction: column; gap: 16px; }
+
+    .step {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .step-num {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .step-content { padding-top: 4px; }
+    .step-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .step-body  { font-size: 14px; color: var(--muted); }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <p class="eyebrow">Clief Notes · Weekly Comp #4</p>
+  <h1>Diana's <span>Agency OS</span></h1>
+  <p class="tagline">A five-specialist AI operating system for a boutique Austin real estate team. No new software. Operational in a day.</p>
+  <div class="badges">
+    <span class="badge blue">5 ICM Specialists</span>
+    <span class="badge green">English + Spanish native</span>
+    <span class="badge">back_to routing</span>
+    <span class="badge">Shared handoff contract</span>
+  </div>
+</header>
+
+<!-- ── THE SYSTEM ── -->
+<section>
+  <h2><span class="label">Architecture</span>The Five Specialists</h2>
+  <div class="specialists">
+
+    <div class="specialist">
+      <div class="spec-icon">🔀</div>
+      <div class="spec-name">Orchestrator</div>
+      <div class="spec-folder">00_orchestrator/</div>
+      <div class="spec-desc">Front door. Every request starts here. Assigns the case ID, detects language, routes to the right specialist.</div>
+    </div>
+
+    <div class="specialist">
+      <div class="spec-icon">🎯</div>
+      <div class="spec-name">Lead Qualifier</div>
+      <div class="spec-folder">01_lead_qualifier/</div>
+      <div class="spec-desc">First contact. Captures intent, budget, timeline. Produces a structured lead card. Works in English or Spanish.</div>
+    </div>
+
+    <div class="specialist">
+      <div class="spec-icon">🏘️</div>
+      <div class="spec-name">Property Research</div>
+      <div class="spec-folder">02_property_research/</div>
+      <div class="spec-desc">Comps, neighborhood brief, listing prep. Feeds context directly into the communication specialist's next draft.</div>
+    </div>
+
+    <div class="specialist">
+      <div class="spec-icon">✉️</div>
+      <div class="spec-name">Client Communication</div>
+      <div class="spec-folder">03_client_communication/</div>
+      <div class="spec-desc">Writes in Diana's voice — or Sara's, or Marcus's. English or Spanish from scratch. Never translated. Bilingual is first-class, not an add-on.</div>
+    </div>
+
+    <div class="specialist">
+      <div class="spec-icon">📋</div>
+      <div class="spec-name">Transaction Coordinator</div>
+      <div class="spec-folder">04_transaction_coordinator/</div>
+      <div class="spec-desc">Active deals. Deadlines. Documents. Flags risks and stalled conditions. Nothing falls through.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FLOW ── -->
+<section>
+  <h2><span class="label">How it moves</span>Request Flow</h2>
+  <div class="flow">
+    <div class="flow-row">
+      <span class="node orchestrator">00_orchestrator</span>
+      <span class="arrow">→</span>
+      <span class="node qualifier">01_lead_qualifier</span>
+      <span class="arrow">→</span>
+      <span class="node comms">03_client_communication</span>
+    </div>
+    <div class="flow-row">
+      <span class="arrow" style="opacity:0">→</span>
+      <span class="node qualifier" style="opacity:0">placeholder</span>
+      <span class="arrow">↓</span>
+    </div>
+    <div class="flow-row">
+      <span class="node research">02_property_research</span>
+      <span class="arrow">→</span>
+      <span class="node comms">03_client_communication</span>
+      <span class="arrow">→</span>
+      <span class="node tc">04_transaction_coordinator</span>
+    </div>
+    <p class="back-arrow">↩ back_to: any specialist can route work back when a deal stalls — lender delay, inspection issue, re-qualification</p>
+  </div>
+</section>
+
+<!-- ── DESIGN DECISIONS ── -->
+<section>
+  <h2><span class="label">What's different</span>Design Decisions</h2>
+  <div class="decisions">
+
+    <div class="decision">
+      <div class="decision-bar"></div>
+      <div>
+        <div class="decision-title">One shared contract — <code>HANDOFF_SCHEMA.md</code></div>
+        <div class="decision-body">
+          Every specialist reads and writes the same envelope. The schema lives in one root file referenced by all five folders. It cannot drift. A new team member opens any folder and the handoff format is identical — no interpretation needed.
+        </div>
+      </div>
+    </div>
+
+    <div class="decision">
+      <div class="decision-bar"></div>
+      <div>
+        <div class="decision-title">The <code>back_to</code> field — because deals don't move linearly</div>
+        <div class="decision-body">
+          Every handoff envelope carries a <code>back_to</code> field. A lender delay in transaction coordination routes back to client communication. A stalled showing routes back to research. The return path is decided at the handoff — not improvised when a deal hits a wall. This is how real estate actually works.
+        </div>
+      </div>
+    </div>
+
+    <div class="decision">
+      <div class="decision-bar green"></div>
+      <div>
+        <div class="decision-title">Bilingual is protocol, not a feature</div>
+        <div class="decision-body">
+          40% of Austin's first-time buyers speak Spanish at home. The <code>language</code> field is set at intake and follows the case through every handoff. The client communication specialist writes in Spanish natively — not translated. The lead qualifier qualifies in Spanish. Diana's team stops losing Spanish-speaking buyers at the first email.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── BILINGUAL CALLOUT ── -->
+<section>
+  <div class="bilingual-callout">
+    <h3>Why bilingual matters in Austin</h3>
+    <p>Austin's residential market includes a large first-time buyer population where Spanish is the primary home language. Most AI real estate tools treat Spanish as an afterthought — a translation toggle. This system treats it as first-class: <code>language: es</code> is set at intake, follows every handoff, and drives native Spanish drafts from the communication specialist. Diana's team handles more buyers, with less communication lag, without Diana reading every draft.</p>
+  </div>
+</section>
+
+<!-- ── HANDOFF PREVIEW ── -->
+<section>
+  <h2><span class="label">The Contract</span>What Every Handoff Looks Like</h2>
+  <div class="envelope">
+    <div><span class="env-key">case_id:</span>   <span class="env-val">DIANA-20260516-007</span></div>
+    <div><span class="env-key">from:</span>      <span class="env-val">01_lead_qualifier</span></div>
+    <div><span class="env-key">to:</span>        <span class="env-val">03_client_communication</span></div>
+    <div><span class="env-key">back_to:</span>   <span class="env-val">01_lead_qualifier</span>   <span class="env-note"># if timeline shifts, re-qualify</span></div>
+    <div><span class="env-key">status:</span>    <span class="env-val">active</span></div>
+    <div><span class="env-key">language:</span>  <span class="env-val">es</span>                   <span class="env-note"># set at intake, never changes</span></div>
+    <div><span class="env-key">priority:</span>  <span class="env-val">normal</span></div>
+    <br>
+    <div><span class="env-label">## What I Know</span></div>
+    <div><span class="env-note">First-time buyer, pre-approved $420k, 60-day timeline, East Austin preferred.</span></div>
+    <br>
+    <div><span class="env-label">## What I Don't Know</span></div>
+    <div><span class="env-note">School district priority? HOA tolerance? Flexibility on timeline?</span></div>
+    <br>
+    <div><span class="env-label">## Risks I Flagged</span></div>
+    <div><span class="env-note">Pre-approval expires in 45 days. Tight window if multiple showings needed.</span></div>
+    <br>
+    <div><span class="env-label">## My Deliverable</span></div>
+    <div><span class="env-note">Lead card filed. Intro email needed in Spanish. Use Sara's voice — warm, reassuring.</span></div>
+  </div>
+</section>
+
+<!-- ── ONBOARDING ── -->
+<section>
+  <h2><span class="label">Getting Started</span>Operational in a Day</h2>
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Open the repo in Claude</div>
+        <div class="step-body">Clone or download the repo. Open Claude, start a new project, and add the <code>agency-system/</code> folder as context. Read <code>README.md</code> first.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">One project per specialist</div>
+        <div class="step-body">Create five Claude projects — one per folder. Each project loads its own <code>identity.md</code>, <code>rules.md</code>, and <code>examples.md</code>. The orchestrator is your entry point.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Run the test prompt</div>
+        <div class="step-body">Open the orchestrator project. Paste the test prompt from the README. Watch it route a new buyer inquiry from intake to a draft intro email — the full loop in under 5 minutes.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Teach the team</div>
+        <div class="step-body">Every specialist folder has an examples file with 3 real scenarios. Diana can onboard Sara and Marcus by walking through these — each session is under an hour.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-title">Run a live deal</div>
+        <div class="step-body">The system is ready. First real handoff envelope goes into 01_lead_qualifier. From here Diana just moves work — the architecture handles the rest.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>Diana's Agency OS — Clief Notes Weekly Comp #4</p>
+  <p style="margin-top: 8px;">
+    <a href="https://github.com/InsightfulMinds/cold-start/tree/main/diana-agency-os/agency-system">View on GitHub</a>
+    &nbsp;·&nbsp;
+    Built with Claude + ICM
+  </p>
+</footer>
+
+</body>
+</html>
