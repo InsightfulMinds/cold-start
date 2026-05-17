@@ -1414,15 +1414,45 @@
       transform: translateY(-1px);
     }
 
-    .voice-card:nth-child(2) .voice-play {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-      color: var(--accent);
+    .voice-toggle-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
     }
-
-    .voice-card:nth-child(2) .voice-play:hover {
-      background: var(--accent);
+    .voice-lang-btn {
+      padding: 5px 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: transparent;
+      color: var(--faint);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .voice-lang-btn.active {
+      background: var(--teal);
       color: #fff;
+      border-color: var(--teal);
+    }
+    .voice-lang-btn:not(.active):hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    .voice-relaunch {
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--muted);
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .voice-relaunch:hover { opacity: 1; color: var(--teal); }
+    .voice-unified {
+      grid-column: 1 / -1;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
     }
 
     /* Token efficiency meter */
@@ -2795,27 +2825,22 @@
       </div>
 
       <div class="voice-samples">
-        <div class="voice-card">
-          <h4>English Voice</h4>
+        <div class="voice-card voice-unified">
+          <div class="voice-toggle-row">
+            <button class="voice-lang-btn active" data-lang="en" aria-label="Switch to English">EN</button>
+            <button class="voice-lang-btn" data-lang="es" aria-label="Switch to Spanish">ES</button>
+          </div>
           <div class="voice-wave">
             <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
           </div>
           <audio id="voiceEn" preload="none"></audio>
-          <button class="voice-play" type="button" data-audio="voiceEn" aria-label="Play English sample">
-            &#9654; Play Sample
-          </button>
-          <div class="voice-label">"Welcome to Diana's Agency OS. Five specialists. One handoff. Zero lost deals."</div>
-        </div>
-        <div class="voice-card">
-          <h4 style="color: var(--teal);">Voz en Espa&ntilde;ol</h4>
-          <div class="voice-wave">
-            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-          </div>
           <audio id="voiceEs" preload="none"></audio>
-          <button class="voice-play" type="button" data-audio="voiceEs" aria-label="Play Spanish sample">
-            &#9654; Reproducir
+          <button class="voice-play" type="button" id="voicePlayBtn" aria-label="Play voice sample">
+            &#9654; Play
           </button>
-          <div class="voice-label">"Bienvenidos a Diana's Agency OS. Cinco especialistas. Un traspaso. Cero tratos perdidos."</div>
+          <div class="voice-label" id="voiceLabelEn">"Everything used to live in your head and three Google Docs &mdash; now it lives in one system your whole team can read."</div>
+          <div class="voice-label" id="voiceLabelEs" style="display:none;">"Antes todo viv&iacute;a en tu cabeza y tres documentos de Google &mdash; ahora vive en un sistema que todo tu equipo puede leer."</div>
+          <div class="voice-relaunch" id="voiceRelaunch" style="display:none;">&#128266; Tap to hear the intro again</div>
         </div>
       </div>
 
@@ -3914,26 +3939,60 @@
       setInterval(updateClock, 1000);
     }
 
-    // Voice sample players
-    document.querySelectorAll('.voice-play').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const audio = document.getElementById(btn.dataset.audio);
-        if (audio && audio.src) {
-          audio.paused ? audio.play() : audio.pause();
-          btn.textContent = audio.paused ? '\u25B6 Play' : '\u23F8 Playing...';
-        } else {
-          // Placeholder pulse when no audio file loaded yet
-          const card = btn.closest('.voice-card');
-          const bars = card.querySelectorAll('.voice-wave span');
-          bars.forEach((bar, i) => {
-            bar.style.animation = 'none';
-            bar.offsetHeight; // reflow
-            bar.style.animation = `wave-active 0.4s ease-in-out ${i * 0.05}s 3`;
-          });
-          setTimeout(() => bars.forEach(bar => bar.style.animation = ''), 1500);
-        }
+    // Voice player — language toggle + clip routing + soft relaunch
+    (function() {
+      let activeLang = 'en';
+      let hasPlayed = false;
+      const clipMap = { en: 'voiceEnCta', es: 'voiceEsCta' };
+      const playBtn = document.getElementById('voicePlayBtn');
+      const relaunchEl = document.getElementById('voiceRelaunch');
+      const labelEn = document.getElementById('voiceLabelEn');
+      const labelEs = document.getElementById('voiceLabelEs');
+
+      document.querySelectorAll('.voice-lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.voice-lang-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeLang = btn.dataset.lang;
+          if (labelEn) labelEn.style.display = activeLang === 'en' ? '' : 'none';
+          if (labelEs) labelEs.style.display = activeLang === 'es' ? '' : 'none';
+          if (playBtn) playBtn.textContent = activeLang === 'es' ? '\u25B6 Reproducir' : '\u25B6 Play';
+          if (hasPlayed && relaunchEl) relaunchEl.style.display = '';
+        });
       });
-    });
+
+      if (playBtn) playBtn.addEventListener('click', playVoice);
+      if (relaunchEl) relaunchEl.addEventListener('click', () => { playVoice(); relaunchEl.style.display = 'none'; });
+
+      function playVoice() {
+        const audioEl = document.getElementById(clipMap[activeLang]);
+        if (audioEl && audioEl.getAttribute('src')) {
+          audioEl.currentTime = 0;
+          audioEl.play().then(() => {
+            if (playBtn) playBtn.textContent = '\u23F8 Playing...';
+            hasPlayed = true;
+          }).catch(pulseBars);
+          audioEl.onended = () => {
+            if (playBtn) playBtn.textContent = activeLang === 'es' ? '\u25B6 Reproducir' : '\u25B6 Play';
+            if (relaunchEl) relaunchEl.style.display = '';
+          };
+        } else {
+          pulseBars();
+          hasPlayed = true;
+          if (relaunchEl) relaunchEl.style.display = '';
+        }
+      }
+
+      function pulseBars() {
+        const bars = document.querySelectorAll('.voice-unified .voice-wave span');
+        bars.forEach((bar, i) => {
+          bar.style.animation = 'none';
+          bar.offsetHeight;
+          bar.style.animation = 'wave-active 0.4s ease-in-out ' + (i * 0.05) + 's 3';
+        });
+        setTimeout(() => bars.forEach(bar => bar.style.animation = ''), 1500);
+      }
+    })();
 
     console.log('%c\u00a9 InsightfulMinds 2026 — Diana\'s Agency OS', 'color: #14b8a6; font-size: 14px; font-weight: bold;');
     console.log('%cInspectable files beat vague automation claims. Start with diana-agency-os/agency-system/HANDOFF_SCHEMA.md.', 'color: #e8a946; font-size: 11px;');
