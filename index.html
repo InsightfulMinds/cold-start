@@ -1250,6 +1250,26 @@
       border-right: 1px solid var(--line);
       background: color-mix(in srgb, var(--panel) 50%, #05070a);
       overflow-y: auto;
+      position: relative;
+    }
+
+    /* Redaction blur — shows structure, hides specific values */
+    .df-sidebar::after {
+      content: 'REDACTED — local inputs only';
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      background: linear-gradient(180deg, transparent 0%, rgba(5,7,10,0.35) 12%, rgba(5,7,10,0.55) 50%, rgba(5,7,10,0.35) 88%, transparent 100%);
+      pointer-events: none;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      color: var(--faint);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
     }
 
     .df-brand {
@@ -1292,12 +1312,20 @@
       color: var(--faint);
       background: transparent;
       border: none;
-      cursor: default;
+      font: inherit;
+      cursor: pointer;
     }
 
     .df-tab.active {
       background: var(--teal);
       color: #fff;
+    }
+
+    .df-tab:focus-visible,
+    .df-scenario-button:focus-visible,
+    .lead-step:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
     .df-group-title {
@@ -1419,6 +1447,73 @@
     .df-confidence strong {
       color: var(--green);
       font-weight: 800;
+    }
+
+    .df-redaction-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .df-redaction-chip {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--panel) 65%, transparent);
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .df-redaction-chip strong {
+      display: block;
+      color: var(--faint);
+      font-size: 9px;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .df-scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .df-scenario-button {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--panel) 70%, transparent);
+      color: var(--muted);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+    }
+
+    .df-scenario-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--teal);
+    }
+
+    .df-scenario-button.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--text);
+    }
+
+    .df-scenario-button strong {
+      display: block;
+      color: var(--text);
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .df-scenario-button span {
+      display: block;
+      color: var(--faint);
+      font-size: 10px;
+      line-height: 1.4;
     }
 
     .df-group-label {
@@ -1543,6 +1638,167 @@
       flex: 1;
       height: 14px;
       border-radius: 3px;
+    }
+
+    /* OSMOS lead process */
+    .lead-osmos {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .lead-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #05070a;
+      padding: 18px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.28);
+    }
+
+    .lead-card h3 {
+      color: var(--text);
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .lead-stage-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .lead-step {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--panel);
+      color: var(--muted);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s, background 0.2s;
+    }
+
+    .lead-step:hover {
+      transform: translateX(2px);
+      border-color: var(--teal);
+    }
+
+    .lead-step.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .lead-step b {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--teal-soft);
+      color: var(--teal);
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 12px;
+    }
+
+    .lead-step strong {
+      display: block;
+      color: var(--text);
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    .lead-step span {
+      color: var(--faint);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .lead-record-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .lead-field {
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .lead-field span {
+      display: block;
+      color: var(--faint);
+      font-size: 9px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .lead-field strong {
+      color: var(--text);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .lead-kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .lead-kpi {
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      text-align: center;
+      background: color-mix(in srgb, var(--panel) 65%, transparent);
+    }
+
+    .lead-kpi strong {
+      display: block;
+      color: var(--teal);
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 15px;
+      margin-bottom: 3px;
+    }
+
+    .lead-kpi span {
+      color: var(--faint);
+      font-size: 9px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .subtask-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .subtask-card {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .subtask-card strong {
+      display: block;
+      color: var(--text);
+      font-size: 12px;
+      margin-bottom: 4px;
     }
 
     /* Dashboard mockup */
@@ -1863,7 +2119,7 @@
     }
 
     /* Staggered card cascade */
-    .arch-card, .stat-card, .lang-card, .health-panel, .ladder-card, .drop-zone, .connector-pad {
+    .arch-card, .stat-card, .lang-card, .health-panel, .lead-card, .subtask-card, .ladder-card, .drop-zone, .connector-pad {
       opacity: 0;
       transform: translateY(16px);
       transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1873,6 +2129,8 @@
     .reveal.visible .stat-card,
     .reveal.visible .lang-card,
     .reveal.visible .health-panel,
+    .reveal.visible .lead-card,
+    .reveal.visible .subtask-card,
     .reveal.visible .ladder-card,
     .reveal.visible .drop-zone,
     .reveal.visible .connector-pad {
@@ -1888,7 +2146,7 @@
 
     /* Accessibility */
     @media (prefers-reduced-motion: reduce) {
-      .reveal, .arch-card, .stat-card, .lang-card, .health-panel, .ladder-card, .drop-zone, .connector-pad {
+      .reveal, .arch-card, .stat-card, .lang-card, .health-panel, .lead-card, .subtask-card, .ladder-card, .drop-zone, .connector-pad {
         opacity: 1;
         transform: none;
         transition: none;
@@ -1997,8 +2255,11 @@
       .dash-sidebar { display: none; }
       .dash-pipeline { grid-template-columns: repeat(2, 1fr); }
       .dash-bottom { grid-template-columns: 1fr; }
+      .lead-osmos { grid-template-columns: 1fr; }
+      .lead-kpis, .subtask-grid { grid-template-columns: repeat(2, 1fr); }
       .deal-filter { grid-template-columns: 1fr; }
       .df-sidebar { display: none; }
+      .df-redaction-strip, .df-scenario-grid { grid-template-columns: 1fr; }
       .df-metrics { grid-template-columns: repeat(2, 1fr); }
       .df-charts { grid-template-columns: 1fr; }
       .df-summary-row { grid-template-columns: 1fr; }
@@ -2015,7 +2276,7 @@
       .stats-row { grid-template-columns: 1fr 1fr; }
       section h2 { font-size: 24px; }
       .arch-grid { grid-template-columns: 1fr; }
-      .ladder-grid, .drop-grid, .state-grid, .snapshot-body { grid-template-columns: 1fr; }
+      .ladder-grid, .drop-grid, .state-grid, .snapshot-body, .lead-record-grid, .lead-kpis, .subtask-grid { grid-template-columns: 1fr; }
       .dash-pipeline { grid-template-columns: 1fr; }
     }
   </style>
@@ -2031,6 +2292,7 @@
     <button class="nav-dot" data-target="build" data-label="Build" aria-label="Jump to Build"></button>
     <button class="nav-dot" data-target="edge" data-label="Edge" aria-label="Jump to Edge"></button>
     <button class="nav-dot" data-target="dashboard" data-label="Dashboard" aria-label="Jump to Dashboard"></button>
+    <button class="nav-dot" data-target="leadflow" data-label="Lead Flow" aria-label="Jump to Lead Flow"></button>
     <button class="nav-dot" data-target="dealfilter" data-label="Deal Filter" aria-label="Jump to Deal Filter"></button>
     <button class="nav-dot" data-target="deploy" data-label="Deploy" aria-label="Jump to Deploy"></button>
     <button class="nav-dot" data-target="output" data-label="Output" aria-label="Jump to Output"></button>
@@ -2402,40 +2664,109 @@
     </div>
   </section>
 
+  <!-- OSMOS Lead Process -->
+  <section class="reveal" id="leadflow">
+    <div class="shell">
+      <p class="section-label">OSMOS CRM Pattern</p>
+      <h2>Lead process before deal process.</h2>
+      <p class="section-desc">The page now shows the missing layer between "new inquiry" and "property analysis": capture, dedupe, score, route, and sequence. It borrows the OSMOS CRM pattern without exposing real contacts, source lists, or credentialed systems.</p>
+
+      <div class="lead-osmos">
+        <div class="lead-card">
+          <h3>Redacted lead routing run</h3>
+          <div class="lead-stage-list" aria-label="OSMOS lead process stages">
+            <button class="lead-step active" type="button" data-owner="Intake Router" data-stage="captured" data-score="42" data-next="Create contact, classify language, start five-minute SLA." data-packet="source=email-triage; dedupe=pending; sequence=none">
+              <b>01</b>
+              <span><strong>Capture inbound</strong>Web form, email triage, DM, or phone note enters one public-safe packet.</span>
+            </button>
+            <button class="lead-step" type="button" data-owner="Contact Merge" data-stage="dedupe" data-score="55" data-next="Search email/phone/domain, attach company, preserve original source." data-packet="source=webhook; dedupe=matched-domain; sequence=none">
+              <b>02</b>
+              <span><strong>Dedupe + enrich</strong>Find or create contact, link company, keep source and consent notes intact.</span>
+            </button>
+            <button class="lead-step" type="button" data-owner="Lead Qualifier" data-stage="qualified" data-score="78" data-next="Ask budget, timeline, location, financing, and Spanish preference." data-packet="score=78; intent=buyer; language=es; priority=high">
+              <b>03</b>
+              <span><strong>Score intent</strong>Profile fit, urgency, language, and deal risk become a visible lead score.</span>
+            </button>
+            <button class="lead-step" type="button" data-owner="Diana Team" data-stage="routed" data-score="84" data-next="Assign owner, set back_to, generate first follow-up in the right language." data-packet="owner=Diana Team; back_to=lead_qualifier; channel=sms/email">
+              <b>04</b>
+              <span><strong>Route owner</strong>The lead gets a person, a next step, and a return path before property math.</span>
+            </button>
+            <button class="lead-step" type="button" data-owner="Sequence Engine" data-stage="sequence due" data-score="86" data-next="Day 0 email, Day 2 check-in, Day 4 call task, outcome moves status." data-packet="sequence_step=0; next_due=now; outcome=waiting">
+              <b>05</b>
+              <span><strong>Advance sequence</strong>Due contacts surface by next action; replies become warm, bounces go inactive.</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="lead-card">
+          <h3>Active redacted record</h3>
+          <div class="lead-record-grid">
+            <div class="lead-field"><span>Lead ID</span><strong>LEAD-REDACTED-042</strong></div>
+            <div class="lead-field"><span>Source</span><strong>email-triage / web form</strong></div>
+            <div class="lead-field"><span>Stage</span><strong id="leadStage">captured</strong></div>
+            <div class="lead-field"><span>Owner</span><strong id="leadOwner">Intake Router</strong></div>
+            <div class="lead-field"><span>Score</span><strong id="leadScore">42</strong></div>
+            <div class="lead-field"><span>Next Action</span><strong id="leadNext">Create contact, classify language, start five-minute SLA.</strong></div>
+          </div>
+          <div class="handoff-code" style="font-size: 11px; line-height: 1.7; margin: 0;">
+            <span class="line"><span class="comment">// public-safe packet preview</span></span>
+            <span class="line"><span class="key">"contact":</span> <span class="val">"redacted"</span>,</span>
+            <span class="line"><span class="key">"packet":</span> <span class="val" id="leadPacket">source=email-triage; dedupe=pending; sequence=none</span></span>
+          </div>
+          <div class="lead-kpis">
+            <div class="lead-kpi"><strong>&lt;5m</strong><span>SLA</span></div>
+            <div class="lead-kpi"><strong>90%+</strong><span>auto-route target</span></div>
+            <div class="lead-kpi"><strong>5</strong><span>sequence steps</span></div>
+            <div class="lead-kpi"><strong>0</strong><span>real contacts shown</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subtask-grid" aria-label="Redacted build subtasks">
+        <div class="subtask-card"><strong>1. Redact</strong>Strip real addresses, names, source lists, and exact deal inputs from the public demo.</div>
+        <div class="subtask-card"><strong>2. Interact</strong>Let judges click scenarios and watch the packet, score, and metrics change.</div>
+        <div class="subtask-card"><strong>3. CRM Layer</strong>Show inbound capture, dedupe, scoring, routing, and sequence state from OSMOS patterns.</div>
+        <div class="subtask-card"><strong>4. QA</strong>Verify mobile, dark/light, JS errors, placeholder links, and public-safe copy before pushing.</div>
+      </div>
+    </div>
+  </section>
+
   <!-- Deal Filter -->
   <section class="reveal" id="dealfilter">
     <div class="shell">
-      <p class="section-label">Deal Intelligence</p>
-      <h2>Every property runs through the filter before the team touches it.</h2>
-      <p class="section-desc">Local server. Zero dependencies. Sliders in, metrics out. The agent sees cap rate, cash flow, risk exposure, and break-even before the first showing is scheduled.</p>
+      <p class="section-label">Redacted Deal Intelligence</p>
+      <h2>The property engine is public-safe, but still interactive.</h2>
+      <p class="section-desc">Local server. Zero dependencies. Sliders in, metrics out. The public version masks address, source, and lender specifics while still showing the decision path a buyer agent would use before the first showing is scheduled.</p>
 
       <div class="deal-filter">
         <div class="df-sidebar">
           <div class="df-brand">Deal <em>Filter</em></div>
-          <div class="df-subtitle">Property Intelligence Engine</div>
+          <div class="df-subtitle">Redacted Property Engine</div>
 
           <div class="df-tabs">
-            <span class="df-tab">Input</span>
-            <span class="df-tab active">Sliders</span>
-            <span class="df-tab">Scenarios</span>
+            <button class="df-tab" type="button">Input</button>
+            <button class="df-tab active" type="button">Sliders</button>
+            <button class="df-tab" type="button">Scenarios</button>
           </div>
 
-          <div class="df-group-title">Property Inputs</div>
-          <div class="df-row"><span>Purchase Price</span><span>$350,000</span></div>
+          <div class="df-group-title">Redacted Inputs</div>
+          <div class="df-row"><span>Property ID</span><span>AUS-REDACTED-017</span></div>
+          <div class="df-row"><span>Address</span><span>Hidden</span></div>
+          <div class="df-row"><span>Purchase Band</span><span>$325K-$375K</span></div>
           <div class="df-slider"><div class="df-slider-fill" style="width:58%;"></div><div class="df-slider-dot" style="left:58%;"></div></div>
-          <div class="df-row"><span>Monthly Rent (Gross)</span><span>$3,000</span></div>
+          <div class="df-row"><span>Rent Band</span><span>$2.7K-$3.2K</span></div>
           <div class="df-slider"><div class="df-slider-fill" style="width:45%;"></div><div class="df-slider-dot" style="left:45%;"></div></div>
-          <div class="df-row"><span>Market Rent (Comp)</span><span>$2,800</span></div>
+          <div class="df-row"><span>Comp Band</span><span>$2.6K-$2.9K</span></div>
           <div class="df-slider"><div class="df-slider-fill" style="width:42%;"></div><div class="df-slider-dot" style="left:42%;"></div></div>
-          <div class="df-row"><span>Monthly Taxes</span><span>$300</span></div>
+          <div class="df-row"><span>Tax Band</span><span>Masked</span></div>
           <div class="df-slider"><div class="df-slider-fill" style="width:15%;"></div><div class="df-slider-dot" style="left:15%;"></div></div>
-          <div class="df-row"><span>Monthly Insurance</span><span>$150</span></div>
+          <div class="df-row"><span>Insurance</span><span>Masked</span></div>
           <div class="df-slider"><div class="df-slider-fill" style="width:10%;"></div><div class="df-slider-dot" style="left:10%;"></div></div>
 
           <div class="df-group-title" style="color: var(--teal);">Financing</div>
-          <div class="df-row"><span>Down Payment</span><span>25%</span></div>
+          <div class="df-row"><span>Down Payment</span><span>Scenario</span></div>
           <div class="df-slider"><div class="df-slider-fill" style="width:25%;"></div><div class="df-slider-dot" style="left:25%;"></div></div>
-          <div class="df-row"><span>Interest Rate</span><span>6.5%</span></div>
+          <div class="df-row"><span>Interest Rate</span><span>Scenario</span></div>
           <div class="df-slider"><div class="df-slider-fill" style="width:43%;"></div><div class="df-slider-dot" style="left:43%;"></div></div>
           <div class="df-row"><span>Term</span><span>30 yrs</span></div>
           <div class="df-slider"><div class="df-slider-fill" style="width:100%;"></div><div class="df-slider-dot" style="left:100%;"></div></div>
@@ -2444,7 +2775,28 @@
         <div class="df-main">
           <div class="df-topbar">
             <span class="online-dot"></span>
-            <strong>Deal Filter</strong> &mdash; Local server, zero dependencies
+            <strong>Deal Filter</strong> &mdash; Public redacted mode
+          </div>
+
+          <div class="df-redaction-strip" aria-label="Redaction status">
+            <div class="df-redaction-chip"><strong>Property</strong>AUS-REDACTED-017</div>
+            <div class="df-redaction-chip"><strong>Address</strong>Hidden from public view</div>
+            <div class="df-redaction-chip"><strong>Inputs</strong>Demo bands, no client data</div>
+          </div>
+
+          <div class="df-scenario-grid" aria-label="Deal filter scenario controls">
+            <button class="df-scenario-button active" type="button" data-df-scenario="base" data-risk="1 masked risk rule" data-performance="Average performance" data-potential="Limited upside" data-confidence="High" data-rent="$3.0K band" data-noi="$23.0K" data-cash="$261" data-cap="6.58%" data-coc="3.58%" data-dscr="1.16" data-ltv="75%" data-break="86.3%" data-base="40" data-cons="20" data-opt="60" data-dscr-base="60" data-dscr-cons="40" data-dscr-opt="80">
+              <strong>Base Case</strong>
+              <span>Current public-safe assumptions.</span>
+            </button>
+            <button class="df-scenario-button" type="button" data-df-scenario="conservative" data-risk="2 masked risk rules" data-performance="Below target" data-potential="Needs price concession" data-confidence="Medium" data-rent="$2.8K band" data-noi="$18.6K" data-cash="-$84" data-cap="5.31%" data-coc="-1.15%" data-dscr="0.94" data-ltv="78%" data-break="94.8%" data-base="24" data-cons="12" data-opt="42" data-dscr-base="42" data-dscr-cons="28" data-dscr-opt="61">
+              <strong>Conservative</strong>
+              <span>Rent slips, cost buffer rises.</span>
+            </button>
+            <button class="df-scenario-button" type="button" data-df-scenario="opportunity" data-risk="0 high-severity rules" data-performance="Above target" data-potential="Strong follow-up" data-confidence="High" data-rent="$3.2K band" data-noi="$27.9K" data-cash="$487" data-cap="7.98%" data-coc="6.71%" data-dscr="1.34" data-ltv="72%" data-break="78.5%" data-base="58" data-cons="36" data-opt="74" data-dscr-base="72" data-dscr-cons="52" data-dscr-opt="90">
+              <strong>Opportunity</strong>
+              <span>Better rent, cleaner risk path.</span>
+            </button>
           </div>
 
           <div class="df-group-label">Executive Summary</div>
@@ -2452,34 +2804,34 @@
             <div class="df-summary-card">
               <div class="arrow up">&uarr;</div>
               <h4>Risk Exposure</h4>
-              <p>1 high-severity risk rule(s)</p>
+              <p id="dfRisk">1 masked risk rule</p>
             </div>
             <div class="df-summary-card">
               <div class="arrow flat">&rarr;</div>
               <h4>Current Performance</h4>
-              <p>Average performance</p>
+              <p id="dfPerformance">Average performance</p>
             </div>
             <div class="df-summary-card">
               <div class="arrow down">&darr;</div>
               <h4>Future Potential</h4>
-              <p>Limited upside</p>
+              <p id="dfPotential">Limited upside</p>
             </div>
           </div>
 
-          <div class="df-confidence">Confidence <strong>High</strong> &mdash; All inputs supported</div>
+          <div class="df-confidence">Confidence <strong id="dfConfidence">High</strong> &mdash; Redacted demo inputs supported</div>
 
           <div class="df-group-label">Core Metrics</div>
           <div class="df-metrics">
-            <div class="df-metric"><div class="label">Monthly Rent</div><div class="value">$3,000</div></div>
-            <div class="df-metric"><div class="label">NOI (Annual)</div><div class="value teal">$23,040</div></div>
-            <div class="df-metric"><div class="label">Cash Flow</div><div class="value green">$261</div></div>
-            <div class="df-metric"><div class="label">Cap Rate</div><div class="value amber">6.58%</div></div>
+            <div class="df-metric"><div class="label">Monthly Rent</div><div class="value" id="dfRent">$3.0K band</div></div>
+            <div class="df-metric"><div class="label">NOI (Annual)</div><div class="value teal" id="dfNoi">$23.0K</div></div>
+            <div class="df-metric"><div class="label">Cash Flow</div><div class="value green" id="dfCash">$261</div></div>
+            <div class="df-metric"><div class="label">Cap Rate</div><div class="value amber" id="dfCap">6.58%</div></div>
           </div>
           <div class="df-metrics" style="margin-top: 8px;">
-            <div class="df-metric"><div class="label">CoC Return</div><div class="value">3.58%</div></div>
-            <div class="df-metric"><div class="label">DSCR</div><div class="value teal">1.16</div></div>
-            <div class="df-metric"><div class="label">LTV</div><div class="value">75.0%</div></div>
-            <div class="df-metric"><div class="label">Break-Even</div><div class="value amber">86.3%</div></div>
+            <div class="df-metric"><div class="label">CoC Return</div><div class="value" id="dfCoc">3.58%</div></div>
+            <div class="df-metric"><div class="label">DSCR</div><div class="value teal" id="dfDscr">1.16</div></div>
+            <div class="df-metric"><div class="label">LTV</div><div class="value" id="dfLtv">75%</div></div>
+            <div class="df-metric"><div class="label">Break-Even</div><div class="value amber" id="dfBreak">86.3%</div></div>
           </div>
 
           <div class="df-group-label">Visual Analysis</div>
@@ -2488,15 +2840,15 @@
               <h5>Scenario Cash Flow</h5>
               <div class="bar-group">
                 <div class="bar-col">
-                  <div class="bar" style="height:40px; background:var(--teal);"></div>
+                  <div class="bar" id="dfBarBase" style="height:40px; background:var(--teal);"></div>
                   <span class="bar-label">Base</span>
                 </div>
                 <div class="bar-col">
-                  <div class="bar" style="height:20px; background:var(--rose);"></div>
+                  <div class="bar" id="dfBarCons" style="height:20px; background:var(--rose);"></div>
                   <span class="bar-label">Cons.</span>
                 </div>
                 <div class="bar-col">
-                  <div class="bar" style="height:60px; background:var(--green);"></div>
+                  <div class="bar" id="dfBarOpt" style="height:60px; background:var(--green);"></div>
                   <span class="bar-label">Opt.</span>
                 </div>
               </div>
@@ -2508,9 +2860,9 @@
             <div class="df-chart">
               <h5>Scenario DSCR</h5>
               <div class="dscr-bars">
-                <div class="dscr-row">Base <div class="dscr-bar" style="background: var(--accent); width: 60%;"></div></div>
-                <div class="dscr-row">Cons. <div class="dscr-bar" style="background: var(--rose); width: 40%;"></div></div>
-                <div class="dscr-row">Opt. <div class="dscr-bar" style="background: var(--teal); width: 80%;"></div></div>
+                <div class="dscr-row">Base <div class="dscr-bar" id="dfDscrBase" style="background: var(--accent); width: 60%;"></div></div>
+                <div class="dscr-row">Cons. <div class="dscr-bar" id="dfDscrCons" style="background: var(--rose); width: 40%;"></div></div>
+                <div class="dscr-row">Opt. <div class="dscr-bar" id="dfDscrOpt" style="background: var(--teal); width: 80%;"></div></div>
               </div>
             </div>
           </div>
@@ -2891,7 +3243,7 @@
     })();
 
     // Keyboard navigation (Alt + arrow keys between sections)
-    const navSections = ['hero','team','handoff','bilingual','build','edge','dashboard','dealfilter','deploy','output','ladder','aios','cta'];
+    const navSections = ['hero','team','handoff','bilingual','build','edge','dashboard','leadflow','dealfilter','deploy','output','ladder','aios','cta'];
     let currentSection = 0;
     document.addEventListener('keydown', e => {
       if (!e.altKey || e.metaKey || e.ctrlKey) return;
@@ -2931,6 +3283,74 @@
         setReplayStep(next);
       }, 3600);
     }
+
+    // OSMOS lead process preview
+    const leadSteps = Array.from(document.querySelectorAll('.lead-step'));
+    const leadFields = {
+      owner: document.getElementById('leadOwner'),
+      stage: document.getElementById('leadStage'),
+      score: document.getElementById('leadScore'),
+      next: document.getElementById('leadNext'),
+      packet: document.getElementById('leadPacket')
+    };
+    function setLeadStep(step) {
+      leadSteps.forEach(s => s.classList.toggle('active', s === step));
+      if (leadFields.owner) leadFields.owner.textContent = step.dataset.owner;
+      if (leadFields.stage) leadFields.stage.textContent = step.dataset.stage;
+      if (leadFields.score) leadFields.score.textContent = step.dataset.score;
+      if (leadFields.next) leadFields.next.textContent = step.dataset.next;
+      if (leadFields.packet) leadFields.packet.textContent = step.dataset.packet;
+    }
+    leadSteps.forEach(step => step.addEventListener('click', () => setLeadStep(step)));
+
+    // Redacted Deal Filter scenario controls
+    const dfButtons = Array.from(document.querySelectorAll('.df-scenario-button'));
+    const dfFields = {
+      risk: document.getElementById('dfRisk'),
+      performance: document.getElementById('dfPerformance'),
+      potential: document.getElementById('dfPotential'),
+      confidence: document.getElementById('dfConfidence'),
+      rent: document.getElementById('dfRent'),
+      noi: document.getElementById('dfNoi'),
+      cash: document.getElementById('dfCash'),
+      cap: document.getElementById('dfCap'),
+      coc: document.getElementById('dfCoc'),
+      dscr: document.getElementById('dfDscr'),
+      ltv: document.getElementById('dfLtv'),
+      breakEven: document.getElementById('dfBreak'),
+      baseBar: document.getElementById('dfBarBase'),
+      consBar: document.getElementById('dfBarCons'),
+      optBar: document.getElementById('dfBarOpt'),
+      dscrBase: document.getElementById('dfDscrBase'),
+      dscrCons: document.getElementById('dfDscrCons'),
+      dscrOpt: document.getElementById('dfDscrOpt')
+    };
+    function setDealScenario(button) {
+      dfButtons.forEach(b => b.classList.toggle('active', b === button));
+      if (dfFields.risk) dfFields.risk.textContent = button.dataset.risk;
+      if (dfFields.performance) dfFields.performance.textContent = button.dataset.performance;
+      if (dfFields.potential) dfFields.potential.textContent = button.dataset.potential;
+      if (dfFields.confidence) dfFields.confidence.textContent = button.dataset.confidence;
+      if (dfFields.rent) dfFields.rent.textContent = button.dataset.rent;
+      if (dfFields.noi) dfFields.noi.textContent = button.dataset.noi;
+      if (dfFields.cash) {
+        dfFields.cash.textContent = button.dataset.cash;
+        dfFields.cash.classList.toggle('green', !button.dataset.cash.startsWith('-'));
+        dfFields.cash.classList.toggle('amber', button.dataset.cash.startsWith('-'));
+      }
+      if (dfFields.cap) dfFields.cap.textContent = button.dataset.cap;
+      if (dfFields.coc) dfFields.coc.textContent = button.dataset.coc;
+      if (dfFields.dscr) dfFields.dscr.textContent = button.dataset.dscr;
+      if (dfFields.ltv) dfFields.ltv.textContent = button.dataset.ltv;
+      if (dfFields.breakEven) dfFields.breakEven.textContent = button.dataset.break;
+      if (dfFields.baseBar) dfFields.baseBar.style.height = `${button.dataset.base}px`;
+      if (dfFields.consBar) dfFields.consBar.style.height = `${button.dataset.cons}px`;
+      if (dfFields.optBar) dfFields.optBar.style.height = `${button.dataset.opt}px`;
+      if (dfFields.dscrBase) dfFields.dscrBase.style.width = `${button.dataset.dscrBase}%`;
+      if (dfFields.dscrCons) dfFields.dscrCons.style.width = `${button.dataset.dscrCons}%`;
+      if (dfFields.dscrOpt) dfFields.dscrOpt.style.width = `${button.dataset.dscrOpt}%`;
+    }
+    dfButtons.forEach(button => button.addEventListener('click', () => setDealScenario(button)));
 
     // AIOS console pad + local-only drop zones
     const consoleState = document.getElementById('consoleState');
