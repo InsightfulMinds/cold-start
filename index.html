@@ -1232,6 +1232,319 @@
       white-space: nowrap;
     }
 
+    /* Deal Filter / Analyzer */
+    .deal-filter {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #05070a;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+      margin-top: 32px;
+      min-height: 520px;
+    }
+
+    .df-sidebar {
+      padding: 20px;
+      border-right: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel) 50%, #05070a);
+      overflow-y: auto;
+    }
+
+    .df-brand {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 2px;
+    }
+
+    .df-brand em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .df-subtitle {
+      color: var(--faint);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 18px;
+    }
+
+    .df-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 18px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .df-tab {
+      flex: 1;
+      padding: 7px 0;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--faint);
+      background: transparent;
+      border: none;
+      cursor: default;
+    }
+
+    .df-tab.active {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    .df-group-title {
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 16px 0 10px;
+    }
+
+    .df-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      font-size: 13px;
+    }
+
+    .df-row span:first-child { color: var(--muted); }
+    .df-row span:last-child { color: var(--text); font-weight: 600; }
+
+    .df-slider {
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--line);
+      position: relative;
+      margin: 4px 0 10px;
+    }
+
+    .df-slider-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--accent));
+    }
+
+    .df-slider-dot {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid #05070a;
+    }
+
+    .df-main {
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .df-topbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .df-topbar .online-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .df-topbar strong {
+      color: var(--text);
+    }
+
+    .df-summary-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .df-summary-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .df-summary-card .arrow {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .df-summary-card .arrow.up { color: var(--green); }
+    .df-summary-card .arrow.flat { color: var(--accent); }
+    .df-summary-card .arrow.down { color: var(--rose); }
+
+    .df-summary-card h4 {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .df-summary-card p {
+      font-size: 11px;
+      color: var(--faint);
+    }
+
+    .df-confidence {
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .df-confidence strong {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .df-group-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--faint);
+    }
+
+    .df-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .df-metric {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .df-metric .label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--faint);
+      margin-bottom: 4px;
+    }
+
+    .df-metric .value {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text);
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+    }
+
+    .df-metric .value.teal { color: var(--teal); }
+    .df-metric .value.amber { color: var(--accent); }
+    .df-metric .value.green { color: var(--green); }
+
+    .df-charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .df-chart {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      min-height: 120px;
+    }
+
+    .df-chart h5 {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .bar-group {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 80px;
+    }
+
+    .bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .bar-col .bar {
+      width: 100%;
+      border-radius: 3px 3px 0 0;
+      min-height: 4px;
+    }
+
+    .bar-col .bar-label {
+      font-size: 9px;
+      color: var(--faint);
+    }
+
+    .donut-ring {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .donut-ring::after {
+      content: '';
+      position: absolute;
+      inset: 16px;
+      border-radius: 50%;
+      background: #05070a;
+    }
+
+    .dscr-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .dscr-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .dscr-row .dscr-bar {
+      flex: 1;
+      height: 14px;
+      border-radius: 3px;
+    }
+
     /* Dashboard mockup */
     .dash-frame {
       border: 1px solid var(--line);
@@ -1684,6 +1997,11 @@
       .dash-sidebar { display: none; }
       .dash-pipeline { grid-template-columns: repeat(2, 1fr); }
       .dash-bottom { grid-template-columns: 1fr; }
+      .deal-filter { grid-template-columns: 1fr; }
+      .df-sidebar { display: none; }
+      .df-metrics { grid-template-columns: repeat(2, 1fr); }
+      .df-charts { grid-template-columns: 1fr; }
+      .df-summary-row { grid-template-columns: 1fr; }
       section { padding: 56px 0; }
       .hero h1 { font-size: 32px; }
       .test-prompt { font-size: 12px; padding: 16px; }
@@ -1713,6 +2031,7 @@
     <button class="nav-dot" data-target="build" data-label="Build" aria-label="Jump to Build"></button>
     <button class="nav-dot" data-target="edge" data-label="Edge" aria-label="Jump to Edge"></button>
     <button class="nav-dot" data-target="dashboard" data-label="Dashboard" aria-label="Jump to Dashboard"></button>
+    <button class="nav-dot" data-target="dealfilter" data-label="Deal Filter" aria-label="Jump to Deal Filter"></button>
     <button class="nav-dot" data-target="deploy" data-label="Deploy" aria-label="Jump to Deploy"></button>
     <button class="nav-dot" data-target="output" data-label="Output" aria-label="Jump to Output"></button>
     <button class="nav-dot" data-target="ladder" data-label="Ladder" aria-label="Jump to Ladder"></button>
@@ -2075,6 +2394,123 @@
                 <div class="agent-row"><span class="agent-dot" style="background:var(--cyan);"></span> Prop Research <span class="agent-status">idle</span></div>
                 <div class="agent-row"><span class="agent-dot" style="background:var(--accent);"></span> Client Comms <span class="agent-status active-s">drafting</span></div>
                 <div class="agent-row"><span class="agent-dot" style="background:var(--rose);"></span> Txn Coord <span class="agent-status">idle</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deal Filter -->
+  <section class="reveal" id="dealfilter">
+    <div class="shell">
+      <p class="section-label">Deal Intelligence</p>
+      <h2>Every property runs through the filter before the team touches it.</h2>
+      <p class="section-desc">Local server. Zero dependencies. Sliders in, metrics out. The agent sees cap rate, cash flow, risk exposure, and break-even before the first showing is scheduled.</p>
+
+      <div class="deal-filter">
+        <div class="df-sidebar">
+          <div class="df-brand">Deal <em>Filter</em></div>
+          <div class="df-subtitle">Property Intelligence Engine</div>
+
+          <div class="df-tabs">
+            <span class="df-tab">Input</span>
+            <span class="df-tab active">Sliders</span>
+            <span class="df-tab">Scenarios</span>
+          </div>
+
+          <div class="df-group-title">Property Inputs</div>
+          <div class="df-row"><span>Purchase Price</span><span>$350,000</span></div>
+          <div class="df-slider"><div class="df-slider-fill" style="width:58%;"></div><div class="df-slider-dot" style="left:58%;"></div></div>
+          <div class="df-row"><span>Monthly Rent (Gross)</span><span>$3,000</span></div>
+          <div class="df-slider"><div class="df-slider-fill" style="width:45%;"></div><div class="df-slider-dot" style="left:45%;"></div></div>
+          <div class="df-row"><span>Market Rent (Comp)</span><span>$2,800</span></div>
+          <div class="df-slider"><div class="df-slider-fill" style="width:42%;"></div><div class="df-slider-dot" style="left:42%;"></div></div>
+          <div class="df-row"><span>Monthly Taxes</span><span>$300</span></div>
+          <div class="df-slider"><div class="df-slider-fill" style="width:15%;"></div><div class="df-slider-dot" style="left:15%;"></div></div>
+          <div class="df-row"><span>Monthly Insurance</span><span>$150</span></div>
+          <div class="df-slider"><div class="df-slider-fill" style="width:10%;"></div><div class="df-slider-dot" style="left:10%;"></div></div>
+
+          <div class="df-group-title" style="color: var(--teal);">Financing</div>
+          <div class="df-row"><span>Down Payment</span><span>25%</span></div>
+          <div class="df-slider"><div class="df-slider-fill" style="width:25%;"></div><div class="df-slider-dot" style="left:25%;"></div></div>
+          <div class="df-row"><span>Interest Rate</span><span>6.5%</span></div>
+          <div class="df-slider"><div class="df-slider-fill" style="width:43%;"></div><div class="df-slider-dot" style="left:43%;"></div></div>
+          <div class="df-row"><span>Term</span><span>30 yrs</span></div>
+          <div class="df-slider"><div class="df-slider-fill" style="width:100%;"></div><div class="df-slider-dot" style="left:100%;"></div></div>
+        </div>
+
+        <div class="df-main">
+          <div class="df-topbar">
+            <span class="online-dot"></span>
+            <strong>Deal Filter</strong> &mdash; Local server, zero dependencies
+          </div>
+
+          <div class="df-group-label">Executive Summary</div>
+          <div class="df-summary-row">
+            <div class="df-summary-card">
+              <div class="arrow up">&uarr;</div>
+              <h4>Risk Exposure</h4>
+              <p>1 high-severity risk rule(s)</p>
+            </div>
+            <div class="df-summary-card">
+              <div class="arrow flat">&rarr;</div>
+              <h4>Current Performance</h4>
+              <p>Average performance</p>
+            </div>
+            <div class="df-summary-card">
+              <div class="arrow down">&darr;</div>
+              <h4>Future Potential</h4>
+              <p>Limited upside</p>
+            </div>
+          </div>
+
+          <div class="df-confidence">Confidence <strong>High</strong> &mdash; All inputs supported</div>
+
+          <div class="df-group-label">Core Metrics</div>
+          <div class="df-metrics">
+            <div class="df-metric"><div class="label">Monthly Rent</div><div class="value">$3,000</div></div>
+            <div class="df-metric"><div class="label">NOI (Annual)</div><div class="value teal">$23,040</div></div>
+            <div class="df-metric"><div class="label">Cash Flow</div><div class="value green">$261</div></div>
+            <div class="df-metric"><div class="label">Cap Rate</div><div class="value amber">6.58%</div></div>
+          </div>
+          <div class="df-metrics" style="margin-top: 8px;">
+            <div class="df-metric"><div class="label">CoC Return</div><div class="value">3.58%</div></div>
+            <div class="df-metric"><div class="label">DSCR</div><div class="value teal">1.16</div></div>
+            <div class="df-metric"><div class="label">LTV</div><div class="value">75.0%</div></div>
+            <div class="df-metric"><div class="label">Break-Even</div><div class="value amber">86.3%</div></div>
+          </div>
+
+          <div class="df-group-label">Visual Analysis</div>
+          <div class="df-charts">
+            <div class="df-chart">
+              <h5>Scenario Cash Flow</h5>
+              <div class="bar-group">
+                <div class="bar-col">
+                  <div class="bar" style="height:40px; background:var(--teal);"></div>
+                  <span class="bar-label">Base</span>
+                </div>
+                <div class="bar-col">
+                  <div class="bar" style="height:20px; background:var(--rose);"></div>
+                  <span class="bar-label">Cons.</span>
+                </div>
+                <div class="bar-col">
+                  <div class="bar" style="height:60px; background:var(--green);"></div>
+                  <span class="bar-label">Opt.</span>
+                </div>
+              </div>
+            </div>
+            <div class="df-chart">
+              <h5>Income vs Expenses</h5>
+              <div class="donut-ring" style="background: conic-gradient(var(--rose) 0% 12%, var(--accent) 12% 22%, var(--faint) 22% 32%, var(--cyan) 32% 40%, var(--teal) 40% 46%, #666 46% 52%, var(--green) 52% 100%);"></div>
+            </div>
+            <div class="df-chart">
+              <h5>Scenario DSCR</h5>
+              <div class="dscr-bars">
+                <div class="dscr-row">Base <div class="dscr-bar" style="background: var(--accent); width: 60%;"></div></div>
+                <div class="dscr-row">Cons. <div class="dscr-bar" style="background: var(--rose); width: 40%;"></div></div>
+                <div class="dscr-row">Opt. <div class="dscr-bar" style="background: var(--teal); width: 80%;"></div></div>
               </div>
             </div>
           </div>
@@ -2455,7 +2891,7 @@
     })();
 
     // Keyboard navigation (Alt + arrow keys between sections)
-    const navSections = ['hero','team','handoff','bilingual','build','edge','dashboard','deploy','output','ladder','aios','cta'];
+    const navSections = ['hero','team','handoff','bilingual','build','edge','dashboard','dealfilter','deploy','output','ladder','aios','cta'];
     let currentSection = 0;
     document.addEventListener('keydown', e => {
       if (!e.altKey || e.metaKey || e.ctrlKey) return;
