@@ -2215,20 +2215,48 @@
 
 
 
-    /* Card glow on hover */
+    /* Card glow on hover — enhanced depth */
     .arch-card:hover {
       border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 0 0 1px var(--accent-soft);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow:
+        0 8px 32px rgba(0,0,0,0.2),
+        0 0 0 1px var(--accent-soft),
+        0 0 40px -10px var(--accent-glow);
     }
 
     .stat-card {
-      transition: all 0.3s;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .stat-card:hover {
       border-color: var(--teal);
-      box-shadow: 0 4px 20px var(--teal-glow);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px var(--teal-glow);
+    }
+
+    /* Glassmorphism depth on health/lang/pipe cards */
+    .health-panel:hover,
+    .lang-card:hover,
+    .ladder-card:hover,
+    .df-chart:hover,
+    .df-summary-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.2), 0 0 0 1px var(--teal-soft);
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .voice-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px var(--teal-glow);
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .pipe-card:hover {
+      border-color: var(--teal);
+      transform: translateX(4px);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     /* Test prompt box */
