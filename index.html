@@ -2266,6 +2266,42 @@
       scroll-margin-top: 70px;
     }
 
+    /* Scroll-to-top button */
+    .scroll-top {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--panel) 80%, transparent);
+      backdrop-filter: blur(12px);
+      color: var(--muted);
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 50;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+      display: grid;
+      place-items: center;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    .scroll-top:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 4px 16px var(--accent-glow);
+      transform: translateY(-2px);
+    }
+
     /* Footer */
     footer {
       padding: 48px 0 32px;
@@ -3314,6 +3350,8 @@
     </div>
   </section>
 
+  <button class="scroll-top" id="scrollTop" aria-label="Back to top" type="button">&uarr;</button>
+
   <footer>
     <div class="shell">
       <div class="footer-tagline">Focus on the problem. We solve. People happy.</div>
@@ -3687,6 +3725,17 @@
         }
       }
     });
+
+    // Scroll-to-top button
+    const scrollTopBtn = document.getElementById('scrollTop');
+    if (scrollTopBtn) {
+      window.addEventListener('scroll', () => {
+        scrollTopBtn.classList.toggle('visible', window.scrollY > 600);
+      }, { passive: true });
+      scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 
     // Image blur-up: remove blur once loaded
     document.querySelectorAll('.section-image[loading="lazy"]').forEach(img => {
