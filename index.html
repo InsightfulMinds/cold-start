@@ -515,6 +515,59 @@
       display: block;
     }
 
+    .media-frame {
+      width: min(100%, var(--media-max, 720px));
+      aspect-ratio: var(--media-aspect, 16 / 10);
+      margin: 32px auto;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 20% 12%, var(--teal-soft), transparent 34%),
+        linear-gradient(135deg, var(--panel) 0%, var(--panel-2) 100%);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      padding: clamp(8px, 1.8vw, 18px);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s, border-color 0.3s;
+    }
+
+    .media-frame:hover {
+      transform: scale(1.01);
+      border-color: color-mix(in srgb, var(--teal) 55%, var(--line));
+      box-shadow: 0 16px 48px rgba(0,0,0,0.25), 0 0 0 1px var(--teal-soft);
+    }
+
+    .media-frame .section-image,
+    .media-frame .hero-image {
+      width: 100%;
+      height: 100%;
+      max-width: none !important;
+      margin: 0;
+      border: 0;
+      border-radius: 10px;
+      object-fit: contain;
+      background: transparent;
+    }
+
+    .media-frame .section-image:hover,
+    .media-frame .hero-image:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .hero-frame {
+      --media-max: 780px;
+      --media-aspect: 16 / 10;
+    }
+
+    .media-frame.square-safe {
+      --media-aspect: 1 / 1;
+    }
+
+    .media-frame.wide-safe {
+      --media-aspect: 16 / 9;
+    }
+
     /* Section border gradient (replaces flat line) */
     section {
       border-top: none;
@@ -2520,6 +2573,15 @@
       .shell { width: calc(100% - 32px); }
       .hero { padding: 64px 0 48px; }
       .section-image { max-width: 100% !important; height: auto; }
+      .media-frame,
+      .hero-frame,
+      .media-frame.square-safe,
+      .media-frame.wide-safe {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        max-height: min(70vh, 520px);
+        margin: 24px auto;
+      }
       .handoff-visual { grid-template-columns: 1fr; }
       .bilingual-grid { grid-template-columns: 1fr; }
       .voice-samples { grid-template-columns: 1fr; }
@@ -2555,6 +2617,14 @@
       .hero-sub { font-size: 15px; }
       .hero h1 { font-size: 28px; }
       .mobile-break { display: block; }
+      .media-frame,
+      .hero-frame,
+      .media-frame.square-safe,
+      .media-frame.wide-safe {
+        aspect-ratio: 1 / 1;
+        max-height: min(62vh, 380px);
+        padding: 8px;
+      }
       .stats-row { grid-template-columns: 1fr 1fr; }
       section h2 { font-size: 24px; }
       .arch-grid { grid-template-columns: 1fr; }
@@ -2603,7 +2673,9 @@
         Test the Stalled Deal &rarr;
       </a>
       <div class="hero-proof">Five folders. One packet. Zero logins. Inspect the markdown, then run the messy lead.</div>
-      <img src="diana-agency-os/images/hero-five-folders.png" alt="Five Specialists Overview" class="hero-image" width="1024" height="1024">
+      <figure class="media-frame hero-frame" aria-label="Five Specialists Overview">
+        <img src="diana-agency-os/images/hero-five-folders.png" alt="Five Specialists Overview" class="hero-image" width="1024" height="1024">
+      </figure>
     </div>
   </div>
 
@@ -2617,32 +2689,34 @@
       <div class="arch-grid">
         <div class="arch-card">
           <div class="arch-card-icon router">&#9654;</div>
-          <h3>00 Orchestrator</h3>
+          <h3>00 Orchestrator <span style="float:right;font-size:10px;color:var(--faint);font-weight:600;">4 files</span></h3>
           <p>Routes every request. Assigns case IDs. Detects language preference at intake. Never does the work; it protects ownership so nothing drifts.</p>
         </div>
         <div class="arch-card">
           <div class="arch-card-icon intake">&#9734;</div>
-          <h3>01 Lead Qualifier</h3>
+          <h3>01 Lead Qualifier <span style="float:right;font-size:10px;color:var(--faint);font-weight:600;">4 files</span></h3>
           <p>First human touchpoint. Captures budget, timeline, language, motivation, and readiness. Separates real buyers from polite browsers.</p>
         </div>
         <div class="arch-card">
           <div class="arch-card-icon research">&#9881;</div>
-          <h3>02 Property Research</h3>
+          <h3>02 Property Research <span style="float:right;font-size:10px;color:var(--faint);font-weight:600;">4 files</span></h3>
           <p>The analyst. Comps, days on market, price per sqft, school fit, commute context, and neighborhood risk for buyer or listing decisions.</p>
         </div>
         <div class="arch-card">
           <div class="arch-card-icon comms">&#9993;</div>
-          <h3>03 Client Comms</h3>
+          <h3>03 Client Comms <span style="float:right;font-size:10px;color:var(--faint);font-weight:600;">5 files</span></h3>
           <p>Writes in Diana's voice. Matches tone to deal stage. Drafts in English or Spanish from the same source facts, never as an afterthought.</p>
         </div>
         <div class="arch-card">
           <div class="arch-card-icon txn">&#10003;</div>
-          <h3>04 Transaction Coordinator</h3>
+          <h3>04 Transaction Coord <span style="float:right;font-size:10px;color:var(--faint);font-weight:600;">4 files</span></h3>
           <p>Tracks every deadline, document, and open item. Flags anything inside the danger window. Only this folder moves a file toward close.</p>
         </div>
       </div>
 
-      <img src="diana-agency-os/images/architecture-flow.png" alt="Architecture Flow Diagram" class="section-image" loading="lazy" width="1024" height="1024">
+      <figure class="media-frame wide-safe" aria-label="Architecture Flow Diagram">
+        <img src="diana-agency-os/images/architecture-flow.png" alt="Architecture Flow Diagram" class="section-image" loading="lazy" width="1024" height="1024">
+      </figure>
     </div>
   </section>
 
@@ -2653,7 +2727,9 @@
       <h2>Deals Don't Move Linearly</h2>
       <p class="section-desc">You've probably seen what happens when a deal stalls: it falls into a void. Nobody owns it. The <code>back_to</code> field means when something breaks, the system already knows who picks it up next and what context travels with it.</p>
 
-      <img src="diana-agency-os/images/handoff-envelope.png" alt="Handoff Envelope Visualization" class="section-image" loading="lazy" width="1024" height="1024">
+      <figure class="media-frame square-safe" aria-label="Handoff Envelope Visualization">
+        <img src="diana-agency-os/images/handoff-envelope.png" alt="Handoff Envelope Visualization" class="section-image" loading="lazy" width="1024" height="1024">
+      </figure>
 
       <div class="handoff-visual">
         <div class="handoff-code">
@@ -2803,7 +2879,9 @@
       <h2>What wins: deal health the system sees before the deal dies.</h2>
       <p class="section-desc">Most entries can route a task forward. Diana's Agency OS shows what happens when the deal is no longer clean: who owns the stall, who drafts the client message, and whether the team has capacity to recover before the buyer loses trust.</p>
 
-      <img src="diana-agency-os/images/deal-health-dashboard.png" alt="García Family Deal Health Dashboard" class="section-image" loading="lazy" width="1024" height="1024" style="max-width: 480px;">
+      <figure class="media-frame square-safe" style="--media-max: 520px;" aria-label="García Family Deal Health Dashboard">
+        <img src="diana-agency-os/images/deal-health-dashboard.png" alt="García Family Deal Health Dashboard" class="section-image" loading="lazy" width="1024" height="1024">
+      </figure>
 
       <div class="deal-health">
         <div class="health-panel">
@@ -3158,7 +3236,9 @@
     <div class="shell" style="text-align: center;">
       <p class="section-label">Get Running</p>
       <h2>Three steps. No accounts. No approvals.</h2>
-      <img src="diana-agency-os/images/three-step-deploy.png" alt="Three Step Deploy Flow" class="section-image" loading="lazy" width="1024" height="1024" style="max-width: 600px; margin-bottom: 16px;">
+      <figure class="media-frame wide-safe" style="--media-max: 640px; margin-bottom: 16px;" aria-label="Three Step Deploy Flow">
+        <img src="diana-agency-os/images/three-step-deploy.png" alt="Three Step Deploy Flow" class="section-image" loading="lazy" width="1024" height="1024">
+      </figure>
       <div class="arch-grid" style="margin-top: 40px;">
         <div class="arch-card" style="text-align: left;">
           <div class="arch-card-icon router" style="font-weight: 900; font-size: 14px;">1</div>
@@ -3347,7 +3427,9 @@
   <!-- CTA -->
   <section class="cta-section reveal" id="cta">
     <div class="shell">
-      <img src="diana-agency-os/images/scroll-journey-map.png" alt="System Journey: Problem to Solution to Proof" class="section-image" loading="lazy" width="1024" height="1024" style="max-width: 560px; margin-bottom: 24px;">
+      <figure class="media-frame wide-safe" style="--media-max: 600px; margin-bottom: 24px;" aria-label="System Journey: Problem to Solution to Proof">
+        <img src="diana-agency-os/images/scroll-journey-map.png" alt="System Journey: Problem to Solution to Proof" class="section-image" loading="lazy" width="1024" height="1024">
+      </figure>
       <h2>The real test: does your team lose deals when bilingual clients call?</h2>
       <p>Clone the repo. Open the orchestrator. Paste this and watch what happens:</p>
       <div class="test-prompt">Route this: new Spanish-speaking buyer inquiry, budget $400K, Mueller area, no pre-approval yet, family needs to move before August.</div>
