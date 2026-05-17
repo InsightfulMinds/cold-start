@@ -557,6 +557,72 @@
       border-radius: 4px;
     }
 
+    /* Floating nav dots */
+    .nav-dots {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--faint);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 0;
+      position: relative;
+    }
+
+    .nav-dot.active {
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent-glow);
+      transform: scale(1.4);
+    }
+
+    .nav-dot::after {
+      content: attr(data-label);
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      white-space: nowrap;
+      font-size: 11px;
+      color: var(--muted);
+      background: var(--panel);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .nav-dot:hover::after {
+      opacity: 1;
+    }
+
+    /* Ambient particles canvas */
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.4;
+    }
+
+    /* Section anchors for smooth nav */
+    section[id] {
+      scroll-margin-top: 70px;
+    }
+
     /* Footer */
     footer {
       padding: 32px 0;
@@ -693,6 +759,7 @@
       section { padding: 56px 0; }
       .hero h1 { font-size: 32px; }
       .test-prompt { font-size: 12px; padding: 16px; }
+      .nav-dots { display: none; }
     }
 
     @media (max-width: 480px) {
@@ -706,7 +773,18 @@
   </style>
 </head>
 <body>
+  <canvas id="particles"></canvas>
   <div class="scroll-progress" id="scrollProgress"></div>
+  <nav class="nav-dots" id="navDots">
+    <button class="nav-dot active" data-target="hero" data-label="Home"></button>
+    <button class="nav-dot" data-target="team" data-label="Team"></button>
+    <button class="nav-dot" data-target="handoff" data-label="Handoff"></button>
+    <button class="nav-dot" data-target="bilingual" data-label="Bilingual"></button>
+    <button class="nav-dot" data-target="build" data-label="Build"></button>
+    <button class="nav-dot" data-target="edge" data-label="Edge"></button>
+    <button class="nav-dot" data-target="deploy" data-label="Deploy"></button>
+    <button class="nav-dot" data-target="cta" data-label="Try It"></button>
+  </nav>
   <header>
     <div class="shell header-inner">
       <a href="#" class="logo">
@@ -719,7 +797,7 @@
     </div>
   </header>
 
-  <div class="hero">
+  <div class="hero" id="hero">
     <div class="shell">
       <div class="hero-badge">Clief Notes Weekly Comp #4</div>
       <h1>Diana's <span>Agency OS</span></h1>
@@ -733,7 +811,7 @@
   </div>
 
   <!-- Architecture -->
-  <section class="reveal">
+  <section class="reveal" id="team">
     <div class="shell">
       <p class="section-label">The Team</p>
       <h2>Five Specialists. One Handoff Contract.</h2>
@@ -772,7 +850,7 @@
   </section>
 
   <!-- Handoff -->
-  <section class="reveal">
+  <section class="reveal" id="handoff">
     <div class="shell">
       <p class="section-label">The Design Decision</p>
       <h2>Deals Don't Move Linearly</h2>
@@ -803,7 +881,7 @@
   </section>
 
   <!-- Bilingual -->
-  <section class="reveal">
+  <section class="reveal" id="bilingual">
     <div class="shell">
       <p class="section-label">Bilingual by Design</p>
       <h2>A bilingual buyer should not feel like an exception.</h2>
@@ -846,7 +924,7 @@
   </section>
 
   <!-- How It Was Built -->
-  <section class="reveal">
+  <section class="reveal" id="build">
     <div class="shell">
       <p class="section-label">Behind the Build</p>
       <h2>3 hours. One real client pattern. Zero guesswork.</h2>
@@ -873,7 +951,7 @@
   </section>
 
   <!-- Competitive Edge -->
-  <section class="reveal">
+  <section class="reveal" id="edge">
     <div class="shell">
       <p class="section-label">Competitive Edge</p>
       <h2>The missing layer is deal health.</h2>
@@ -916,7 +994,7 @@
   </section>
 
   <!-- Deploy Steps -->
-  <section class="reveal">
+  <section class="reveal" id="deploy">
     <div class="shell" style="text-align: center;">
       <p class="section-label">Get Running</p>
       <h2>Three commands. No accounts.</h2>
@@ -941,7 +1019,7 @@
   </section>
 
   <!-- CTA -->
-  <section class="cta-section reveal">
+  <section class="cta-section reveal" id="cta">
     <div class="shell">
       <img src="diana-agency-os/images/dashboard-preview.png" alt="Dashboard Preview" class="section-image" loading="lazy">
       <h2>You're probably wondering if this actually works.</h2>
@@ -1051,6 +1129,50 @@
         card.style.transform = '';
       });
     });
+
+    // Nav dots — active tracking + click navigation
+    const dots = document.querySelectorAll('.nav-dot');
+    const sections = Array.from(dots).map(d => document.getElementById(d.dataset.target)).filter(Boolean);
+    const dotObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          dots.forEach(d => d.classList.toggle('active', d.dataset.target === e.target.id));
+        }
+      });
+    }, { threshold: 0.3 });
+    sections.forEach(s => dotObserver.observe(s));
+    dots.forEach(d => d.addEventListener('click', () => {
+      document.getElementById(d.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
+    }));
+
+    // Ambient particles
+    (function() {
+      const c = document.getElementById('particles');
+      const ctx = c.getContext('2d');
+      let w, h, pts = [];
+      function resize() { w = c.width = innerWidth; h = c.height = innerHeight; }
+      resize();
+      window.addEventListener('resize', resize);
+      const teal = [20, 184, 166], amber = [232, 169, 70];
+      for (let i = 0; i < 40; i++) {
+        const col = Math.random() > 0.5 ? teal : amber;
+        pts.push({ x: Math.random()*w, y: Math.random()*h, r: Math.random()*1.5+0.5, dx: (Math.random()-0.5)*0.3, dy: (Math.random()-0.5)*0.3, col });
+      }
+      function draw() {
+        ctx.clearRect(0,0,w,h);
+        pts.forEach(p => {
+          p.x += p.dx; p.y += p.dy;
+          if (p.x < 0 || p.x > w) p.dx *= -1;
+          if (p.y < 0 || p.y > h) p.dy *= -1;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+          ctx.fillStyle = `rgba(${p.col[0]},${p.col[1]},${p.col[2]},0.3)`;
+          ctx.fill();
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
   </script>
 </body>
 </html>
