@@ -21,6 +21,9 @@
       --accent: #e8a946;
       --accent-soft: rgba(232, 169, 70, 0.12);
       --accent-glow: rgba(232, 169, 70, 0.25);
+      --teal: #14b8a6;
+      --teal-soft: rgba(20, 184, 166, 0.12);
+      --teal-glow: rgba(20, 184, 166, 0.25);
       --blue: #3b82f6;
       --green: #22c55e;
       --green-soft: rgba(34, 197, 94, 0.12);
@@ -40,6 +43,9 @@
       --accent: #c4832a;
       --accent-soft: rgba(196, 131, 42, 0.08);
       --accent-glow: rgba(196, 131, 42, 0.15);
+      --teal: #0d9488;
+      --teal-soft: rgba(13, 148, 136, 0.08);
+      --teal-glow: rgba(13, 148, 136, 0.15);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -240,7 +246,7 @@
       margin-bottom: 16px;
     }
 
-    .arch-card-icon.router { background: rgba(59,130,246,0.12); color: var(--blue); }
+    .arch-card-icon.router { background: var(--teal-soft); color: var(--teal); }
     .arch-card-icon.intake { background: var(--green-soft); color: var(--green); }
     .arch-card-icon.research { background: rgba(56,189,248,0.12); color: var(--cyan); }
     .arch-card-icon.comms { background: var(--accent-soft); color: var(--accent); }
@@ -278,7 +284,7 @@
     }
 
     .handoff-code .key { color: var(--accent); }
-    .handoff-code .val { color: var(--cyan); }
+    .handoff-code .val { color: var(--teal); }
     .handoff-code .comment { color: var(--faint); font-style: italic; }
 
     .handoff-explain h3 {
@@ -296,9 +302,9 @@
     .handoff-explain .highlight {
       display: inline-block;
       padding: 2px 8px;
-      background: var(--accent-soft);
+      background: var(--teal-soft);
       border-radius: 4px;
-      color: var(--accent);
+      color: var(--teal);
       font-weight: 600;
       font-size: 14px;
     }
@@ -359,7 +365,7 @@
     .stat-value {
       font-size: 28px;
       font-weight: 900;
-      color: var(--accent);
+      color: var(--teal);
       margin-bottom: 4px;
     }
 
