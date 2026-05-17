@@ -1022,6 +1022,216 @@
       margin-top: 4px;
     }
 
+    /* Bilingual demo terminal */
+    .bilingual-demo {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      background: #05070a;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+
+    .demo-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .demo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .demo-title {
+      margin-left: 8px;
+      color: var(--faint);
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 11px;
+    }
+
+    .demo-body {
+      padding: 18px 20px;
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .demo-line {
+      opacity: 0;
+      transform: translateX(-8px);
+      animation: demo-appear 0.4s ease forwards;
+    }
+
+    .reveal.visible .demo-line:nth-child(1) { animation-delay: 0.3s; }
+    .reveal.visible .demo-line:nth-child(2) { animation-delay: 0.7s; }
+    .reveal.visible .demo-line:nth-child(3) { animation-delay: 1.1s; }
+    .reveal.visible .demo-line:nth-child(4) { animation-delay: 1.5s; }
+    .reveal.visible .demo-line:nth-child(5) { animation-delay: 1.9s; }
+
+    @keyframes demo-appear {
+      to { opacity: 1; transform: none; }
+    }
+
+    /* Audio player for voice samples */
+    .voice-samples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .voice-card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--panel) 0%, var(--panel-2) 100%);
+      backdrop-filter: blur(8px);
+      text-align: center;
+    }
+
+    .voice-card h4 {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--faint);
+      margin-bottom: 10px;
+    }
+
+    .voice-card .voice-wave {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      height: 32px;
+      margin-bottom: 8px;
+    }
+
+    .voice-wave span {
+      display: inline-block;
+      width: 3px;
+      border-radius: 2px;
+      background: var(--teal);
+      animation: wave-idle 1.5s ease-in-out infinite;
+    }
+
+    .voice-card:nth-child(2) .voice-wave span {
+      background: var(--accent);
+    }
+
+    .voice-wave span:nth-child(1) { height: 8px; animation-delay: 0s; }
+    .voice-wave span:nth-child(2) { height: 16px; animation-delay: 0.1s; }
+    .voice-wave span:nth-child(3) { height: 24px; animation-delay: 0.2s; }
+    .voice-wave span:nth-child(4) { height: 12px; animation-delay: 0.3s; }
+    .voice-wave span:nth-child(5) { height: 20px; animation-delay: 0.4s; }
+    .voice-wave span:nth-child(6) { height: 28px; animation-delay: 0.5s; }
+    .voice-wave span:nth-child(7) { height: 14px; animation-delay: 0.6s; }
+    .voice-wave span:nth-child(8) { height: 22px; animation-delay: 0.7s; }
+    .voice-wave span:nth-child(9) { height: 10px; animation-delay: 0.8s; }
+
+    @keyframes wave-idle {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(0.4); }
+    }
+
+    @keyframes wave-active {
+      0% { transform: scaleY(0.3); }
+      50% { transform: scaleY(1.8); }
+      100% { transform: scaleY(0.3); }
+    }
+
+    .voice-card .voice-label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .voice-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border: 1px solid var(--teal);
+      border-radius: 6px;
+      background: var(--teal-soft);
+      color: var(--teal);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: all 0.25s;
+    }
+
+    .voice-play:hover {
+      background: var(--teal);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .voice-card:nth-child(2) .voice-play {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .voice-card:nth-child(2) .voice-play:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* Token efficiency meter */
+    .token-meter {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 18px;
+      padding: 16px 20px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel);
+    }
+
+    .token-bar {
+      flex: 1;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--line);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .token-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--accent));
+      width: 0%;
+      transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible .token-fill {
+      width: var(--fill, 23%);
+    }
+
+    .token-label {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .token-value {
+      color: var(--teal);
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
     /* Floating nav dots */
     .nav-dots {
       position: fixed;
@@ -1240,6 +1450,7 @@
       .section-image { max-width: 100% !important; height: auto; }
       .handoff-visual { grid-template-columns: 1fr; }
       .bilingual-grid { grid-template-columns: 1fr; }
+      .voice-samples { grid-template-columns: 1fr; }
       .deal-health { grid-template-columns: 1fr; }
       .replay-card { grid-template-columns: 1fr; }
       .ladder-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1380,7 +1591,21 @@
       <h2>A bilingual buyer should not feel like an exception.</h2>
       <p class="section-desc">You already know this matters in Austin. The question isn't whether to support Spanish; it's whether your system makes it automatic or leaves it as one more thing someone has to remember. Here, the handoff envelope carries the language flag. Every specialist knows before they start drafting.</p>
 
-      <img src="diana-agency-os/images/bilingual-split.png" alt="Bilingual Communication Support" class="section-image" loading="lazy" width="1024" height="1024">
+      <div class="bilingual-demo" aria-label="Live bilingual routing demonstration">
+        <div class="demo-header">
+          <span class="demo-dot" style="background:#fb7185;"></span>
+          <span class="demo-dot" style="background:#e8a946;"></span>
+          <span class="demo-dot" style="background:#22c55e;"></span>
+          <span class="demo-title">diana-os ~ bilingual-router</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-line"><span style="color:var(--faint);">[INTAKE]</span> <span style="color:var(--text);">New lead: "Hola, busco casa cerca de Mueller, presupuesto $400K"</span></div>
+          <div class="demo-line"><span style="color:var(--teal);">[DETECT]</span> <span style="color:var(--teal);">Language: <strong>es</strong> (confidence: 0.97)</span></div>
+          <div class="demo-line"><span style="color:var(--teal);">[ROUTE]</span> <span style="color:var(--text);">→ 03_client_comms <span style="color:var(--faint);">(draft_language: es)</span></span></div>
+          <div class="demo-line"><span style="color:var(--accent);">[DRAFT]</span> <span style="color:var(--text);">Generating Spanish-first response...</span></div>
+          <div class="demo-line"><span style="color:var(--green);">[READY]</span> <span style="color:var(--green);">Handoff packet includes lang flag — no manual toggle needed.</span></div>
+        </div>
+      </div>
 
       <div class="bilingual-grid">
         <div class="lang-card">
@@ -1392,6 +1617,31 @@
           <h4 style="color: var(--teal);">Spanish Draft</h4>
           <p>"Mucho gusto en conectar — esto es lo que sigue. Encontr&eacute; tres propiedades en su rango de presupuesto cerca de Mueller. Podemos agendar una visita este s&aacute;bado."</p>
           <div class="note">Asunto: Bienvenida, Mar&iacute;a — esto es lo que sigue</div>
+        </div>
+      </div>
+
+      <div class="voice-samples">
+        <div class="voice-card">
+          <h4>English Voice</h4>
+          <div class="voice-wave">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <audio id="voiceEn" preload="none"></audio>
+          <button class="voice-play" type="button" data-audio="voiceEn" aria-label="Play English sample">
+            &#9654; Play Sample
+          </button>
+          <div class="voice-label">"Welcome to Diana's Agency OS. Five specialists. One handoff. Zero lost deals."</div>
+        </div>
+        <div class="voice-card">
+          <h4 style="color: var(--teal);">Voz en Espa&ntilde;ol</h4>
+          <div class="voice-wave">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <audio id="voiceEs" preload="none"></audio>
+          <button class="voice-play" type="button" data-audio="voiceEs" aria-label="Play Spanish sample">
+            &#9654; Reproducir
+          </button>
+          <div class="voice-label">"Bienvenidos a Diana's Agency OS. Cinco especialistas. Un traspaso. Cero tratos perdidos."</div>
         </div>
       </div>
 
@@ -1659,6 +1909,25 @@
             <div class="connector-pad">NAS / DAS<span>local storage</span></div>
             <div class="connector-pad">Telegram<span>relay control</span></div>
             <div class="connector-pad">AV / Home<span>device hooks</span></div>
+          </div>
+          <div class="token-meter">
+            <span class="token-label">Token budget</span>
+            <div class="token-bar"><div class="token-fill" style="--fill: 23%;"></div></div>
+            <span class="token-value">23% used</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 10px;">
+            <div class="token-meter" style="flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px 14px;">
+              <span class="token-label">Auto-convert</span>
+              <span style="color: var(--teal); font-family: 'JetBrains Mono', monospace; font-size: 11px;">PDF &rarr; MD in 1.2s</span>
+            </div>
+            <div class="token-meter" style="flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px 14px;">
+              <span class="token-label">Vault index</span>
+              <span style="color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 11px;">847 entries cached</span>
+            </div>
+            <div class="token-meter" style="flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px 14px;">
+              <span class="token-label">Skill builder</span>
+              <span style="color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 11px;">40+ bundled skills</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1941,6 +2210,27 @@
           setTimeout(() => dot.remove(), 2500);
         }
       }
+    });
+
+    // Voice sample players
+    document.querySelectorAll('.voice-play').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const audio = document.getElementById(btn.dataset.audio);
+        if (audio && audio.src) {
+          audio.paused ? audio.play() : audio.pause();
+          btn.textContent = audio.paused ? '\u25B6 Play' : '\u23F8 Playing...';
+        } else {
+          // Placeholder pulse when no audio file loaded yet
+          const card = btn.closest('.voice-card');
+          const bars = card.querySelectorAll('.voice-wave span');
+          bars.forEach((bar, i) => {
+            bar.style.animation = 'none';
+            bar.offsetHeight; // reflow
+            bar.style.animation = `wave-active 0.4s ease-in-out ${i * 0.05}s 3`;
+          });
+          setTimeout(() => bars.forEach(bar => bar.style.animation = ''), 1500);
+        }
+      });
     });
 
     console.log('%c\u00a9 InsightfulMinds 2026 — Diana\'s Agency OS', 'color: #14b8a6; font-size: 14px; font-weight: bold;');
