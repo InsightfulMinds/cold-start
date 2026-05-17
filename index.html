@@ -301,6 +301,17 @@
       line-height: 1.2;
     }
 
+    /* Gradient accent on select headings */
+    #edge h2,
+    #dashboard h2,
+    #dealfilter h2,
+    #aios h2 {
+      background: linear-gradient(135deg, var(--text) 40%, var(--teal) 80%, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
     .section-desc {
       color: var(--muted);
       font-size: 16px;
@@ -447,19 +458,24 @@
       font-style: normal;
     }
 
-    /* Images */
+    /* Images — blur-up lazy load */
     .section-image {
       max-width: 100%;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 1px solid var(--line);
       margin: 32px auto;
       display: block;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s, filter 0.8s ease;
+    }
+
+    .section-image[loading="lazy"]:not(.img-loaded) {
+      filter: blur(8px) saturate(0.5);
+      transform: scale(1.02);
     }
 
     .section-image:hover {
-      transform: scale(1.015);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+      transform: scale(1.02);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.25), 0 0 0 1px var(--teal-soft);
     }
 
     .hero-image {
@@ -3596,6 +3612,12 @@
           setTimeout(() => dot.remove(), 2500);
         }
       }
+    });
+
+    // Image blur-up: remove blur once loaded
+    document.querySelectorAll('.section-image[loading="lazy"]').forEach(img => {
+      if (img.complete) { img.classList.add('img-loaded'); }
+      else { img.addEventListener('load', () => img.classList.add('img-loaded'), { once: true }); }
     });
 
     // Smooth background tint shift based on scroll (dark → slightly warm → dark)
