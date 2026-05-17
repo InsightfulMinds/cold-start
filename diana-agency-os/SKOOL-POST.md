@@ -15,15 +15,14 @@ One thing I'd add with another week: a client intake form that auto-populates th
 
 ## Push instructions
 
-1. Go to github.com → New repository → name it `cold-start`, public, no README (we have one)
-2. Run these three commands from your terminal:
+1. Repo is already public at `https://github.com/InsightfulMinds/cold-start`
+2. To update it from a local clone, run:
 
 ```bash
 cd ~/cold-start
-git remote add origin https://github.com/YOUR_USERNAME/cold-start.git
 git push -u origin main
 ```
 
-3. Verify the repo at github.com/YOUR_USERNAME/cold-start
-4. Update the repo link above and paste the writeup into the Skool comment thread
+3. Verify the repo at https://github.com/InsightfulMinds/cold-start
+4. Paste the writeup into the Skool comment thread
 5. Deadline: Sunday May 17 at 9:00 AM PT

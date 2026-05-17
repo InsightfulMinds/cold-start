@@ -248,6 +248,20 @@ priority:  [normal | urgent]         # urgent = deadline within 48h
 
 back_to flows are lateral or backward — any specialist can return to any other.
 ```
+
+---
+
+## Edge Cases
+
+**Malformed envelope:** If you receive a handoff missing required fields (no case_id, no language, no from), do not guess. Route it back to 00_orchestrator with status `stalled` and note the missing fields in "Risks I Flagged."
+
+**Stall escalation timing:** If a case sits at `stalled` for more than 24 hours with no action, the owning specialist must re-route to orchestrator. Do not hold stalled work silently.
+
+**Language mismatch:** If a client responds in a different language than the `language` field, do not change the field. Route to orchestrator with a note: "Client responded in [language]. Requesting language flag review." Orchestrator decides.
+
+**Ambiguous routing:** If the incoming request could go to two specialists (e.g., needs research before qualification), orchestrator routes to the first one in the chain and sets `back_to` to the second. Serial, not parallel.
+
+**Rejected intake by TC:** Transaction coordinator does not accept a deal without an executed contract. If one is missing, TC returns to orchestrator with status `stalled` and a note in "What I Don't Know" specifying what's needed before TC will accept.
 ```
 
 ## Specialist: 00_Orchestrator Identity

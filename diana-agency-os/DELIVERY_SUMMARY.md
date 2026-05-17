@@ -6,7 +6,7 @@ Two tasks completed. All files ready for competition and production.
 
 ## Task 1: Five Flavor Themes for 130% Overkill
 
-**Location:** `/Users/SeanVargas_1/AI_OS/workspace/comms/outputs/2026-05-17-diana-os-flavor-themes.md`
+**Status:** Folded into the public launch site as demo-safe surface features.
 
 Five concrete, buildable enhancements to boost your competition entry from 95% to 130%:
 
@@ -29,7 +29,7 @@ Each theme includes:
 ## Task 2: One-Click Setup Automation
 
 ### A. Quick Start Guide
-**Location:** `/Users/SeanVargas_1/cold-start/diana-agency-os/QUICK_START.md`
+**Location:** `diana-agency-os/QUICK_START.md`
 
 Reduces the 5-step manual process to **3 steps in 15 minutes:**
 1. Create the project (2 min)
@@ -39,7 +39,7 @@ Reduces the 5-step manual process to **3 steps in 15 minutes:**
 Includes a test scenario to verify everything works.
 
 ### B. Setup Automation Script
-**Location:** `/Users/SeanVargas_1/cold-start/diana-agency-os/setup.sh`
+**Location:** `diana-agency-os/setup.sh`
 
 An executable bash script that automatically generates:
 
@@ -47,11 +47,11 @@ An executable bash script that automatically generates:
 2. **UPLOAD_BUNDLE.md** — All files concatenated and copy-paste ready (for review/governance)
 3. **HOW_TO_USE.md** — Helps users choose their setup path
 
-**Output location:** `/Users/SeanVargas_1/cold-start/diana-agency-os/.setup-output/`
+**Output location:** `diana-agency-os/.setup-output/`
 
 **Run it:**
 ```bash
-bash /Users/SeanVargas_1/cold-start/diana-agency-os/setup.sh
+bash diana-agency-os/setup.sh
 ```
 
 ---
