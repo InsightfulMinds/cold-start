@@ -580,6 +580,8 @@
       font-weight: 900;
       color: var(--teal);
       margin-bottom: 4px;
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-variant-numeric: tabular-nums;
     }
 
     .stat-label {
@@ -3609,11 +3611,28 @@
     document.querySelectorAll('.pad-button').forEach(button => {
       button.addEventListener('click', () => {
         document.querySelectorAll('.pad-button').forEach(b => b.classList.toggle('active', b === button));
-        if (consoleState) consoleState.textContent = button.dataset.console;
+        if (consoleState) {
+          consoleState.style.opacity = '0';
+          setTimeout(() => {
+            consoleState.textContent = button.dataset.console;
+            consoleState.style.opacity = '1';
+            consoleState.style.transition = 'opacity 0.3s';
+          }, 150);
+        }
         const mode = consoleModes[button.textContent.trim()];
         if (mode) {
           snapshotWindows.forEach(win => win.classList.toggle('active', win.dataset.snapshot === mode.target));
           appendRuntimeEvent(mode.label, mode.status);
+        }
+        // Flash the console panel border on mode change
+        const panel = button.closest('.console-panel');
+        if (panel) {
+          panel.style.borderColor = 'var(--teal)';
+          panel.style.boxShadow = '0 0 30px var(--teal-glow)';
+          setTimeout(() => {
+            panel.style.borderColor = '';
+            panel.style.boxShadow = '';
+          }, 600);
         }
       });
     });
