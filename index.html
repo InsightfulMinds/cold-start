@@ -913,6 +913,7 @@
     <button class="nav-dot" data-target="build" data-label="Build"></button>
     <button class="nav-dot" data-target="edge" data-label="Edge"></button>
     <button class="nav-dot" data-target="deploy" data-label="Deploy"></button>
+    <button class="nav-dot" data-target="output" data-label="Output"></button>
     <button class="nav-dot" data-target="cta" data-label="Try It"></button>
   </nav>
   <header>
@@ -1161,6 +1162,25 @@
     </div>
   </section>
 
+  <!-- Real Output -->
+  <section class="reveal" id="output">
+    <div class="shell">
+      <p class="section-label">Proof of Work</p>
+      <h2>What the orchestrator actually returns.</h2>
+      <p class="section-desc">Not a mockup. This is the handoff object when you paste a real scenario into folder 00.</p>
+      <div class="handoff-code" style="max-width: 520px;">
+        <span class="line"><span class="comment">// Orchestrator output for: "Spanish-speaking buyer, $400K, Mueller"</span></span>
+        <span class="line"><span class="key">"case_id":</span> <span class="val">"DIANA-20260517-012"</span>,</span>
+        <span class="line"><span class="key">"language":</span> <span class="val">"es"</span>,</span>
+        <span class="line"><span class="key">"detected_from":</span> <span class="val">"intake_context"</span>,</span>
+        <span class="line"><span class="key">"routed_to":</span> <span class="val">"01_lead_qualifier"</span>,</span>
+        <span class="line"><span class="key">"back_to":</span> <span class="val">"00_orchestrator"</span>,</span>
+        <span class="line"><span class="key">"status":</span> <span class="val">"new"</span>,</span>
+        <span class="line"><span class="key">"next_action":</span> <span class="val">"Qualify budget, timeline, motivation. Flag pre-approval gap."</span></span>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="cta-section reveal" id="cta">
     <div class="shell">
@@ -1346,8 +1366,33 @@
       draw();
     })();
 
+    // Easter egg: press 'D' for Diana mode (confetti burst)
+    document.addEventListener('keydown', e => {
+      if (e.key === 'd' || e.key === 'D') {
+        for (let i = 0; i < 30; i++) {
+          const dot = document.createElement('div');
+          const isTeal = Math.random() > 0.5;
+          Object.assign(dot.style, {
+            position: 'fixed', width: '6px', height: '6px', borderRadius: '50%',
+            background: isTeal ? '#14b8a6' : '#e8a946',
+            left: Math.random() * 100 + 'vw', top: '-10px',
+            zIndex: '9999', pointerEvents: 'none', opacity: '1',
+            transition: `all ${1.5 + Math.random()}s cubic-bezier(0.34, 1.56, 0.64, 1)`
+          });
+          document.body.appendChild(dot);
+          requestAnimationFrame(() => {
+            dot.style.top = 100 + Math.random() * 20 + 'vh';
+            dot.style.left = parseFloat(dot.style.left) + (Math.random() - 0.5) * 30 + 'vw';
+            dot.style.opacity = '0';
+          });
+          setTimeout(() => dot.remove(), 2500);
+        }
+      }
+    });
+
     console.log('%c\u00a9 InsightfulMinds 2026 — Diana\'s Agency OS', 'color: #14b8a6; font-size: 14px; font-weight: bold;');
     console.log('%cInspectable files beat vague automation claims. Start with diana-agency-os/agency-system/HANDOFF_SCHEMA.md.', 'color: #e8a946; font-size: 11px;');
+    console.log('%cPress "D" for a surprise.', 'color: #5a6478; font-size: 10px;');
   </script>
 </body>
 </html>
