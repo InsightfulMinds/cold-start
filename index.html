@@ -478,6 +478,37 @@
       transform: none;
     }
 
+    /* Staggered card cascade */
+    .arch-card, .stat-card, .lang-card, .health-panel {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible .arch-card,
+    .reveal.visible .stat-card,
+    .reveal.visible .lang-card,
+    .reveal.visible .health-panel {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal.visible .arch-card:nth-child(1), .reveal.visible .stat-card:nth-child(1), .reveal.visible .lang-card:nth-child(1), .reveal.visible .health-panel:nth-child(1) { transition-delay: 0s; }
+    .reveal.visible .arch-card:nth-child(2), .reveal.visible .stat-card:nth-child(2), .reveal.visible .lang-card:nth-child(2), .reveal.visible .health-panel:nth-child(2) { transition-delay: 0.1s; }
+    .reveal.visible .arch-card:nth-child(3), .reveal.visible .stat-card:nth-child(3) { transition-delay: 0.2s; }
+    .reveal.visible .arch-card:nth-child(4), .reveal.visible .stat-card:nth-child(4) { transition-delay: 0.3s; }
+    .reveal.visible .arch-card:nth-child(5) { transition-delay: 0.4s; }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .arch-card, .stat-card, .lang-card, .health-panel {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .hero-cta::after { animation: none; }
+    }
+
     /* Header accent bar */
     header::after {
       content: '';
@@ -555,6 +586,17 @@
       .bilingual-grid { grid-template-columns: 1fr; }
       .deal-health { grid-template-columns: 1fr; }
       section { padding: 56px 0; }
+      .hero h1 { font-size: 32px; }
+      .test-prompt { font-size: 12px; padding: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .shell { width: calc(100% - 24px); }
+      .hero { padding: 48px 0 36px; }
+      .hero-sub { font-size: 15px; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      section h2 { font-size: 24px; }
+      .arch-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -761,6 +803,31 @@
             <strong>Recovery</strong>
             <span>When the lender slips, the <code>back_to</code> field already routes fallback comps &mdash; before anyone asks.</span>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deploy Steps -->
+  <section class="reveal">
+    <div class="shell" style="text-align: center;">
+      <p class="section-label">Get Running</p>
+      <h2>Three commands. No accounts.</h2>
+      <div class="arch-grid" style="margin-top: 40px;">
+        <div class="arch-card" style="text-align: left;">
+          <div class="arch-card-icon router" style="font-weight: 900; font-size: 14px;">1</div>
+          <h3>Clone</h3>
+          <p><code style="color: var(--teal); font-size: 13px;">git clone insightfulminds/cold-start</code></p>
+        </div>
+        <div class="arch-card" style="text-align: left;">
+          <div class="arch-card-icon intake" style="font-weight: 900; font-size: 14px;">2</div>
+          <h3>Open in Claude</h3>
+          <p>Drag any specialist folder into a Claude Project. The system prompt is already written.</p>
+        </div>
+        <div class="arch-card" style="text-align: left;">
+          <div class="arch-card-icon comms" style="font-weight: 900; font-size: 14px;">3</div>
+          <h3>Run a deal</h3>
+          <p>Paste a client scenario. Watch the handoff schema route it through all five specialists.</p>
         </div>
       </div>
     </div>
