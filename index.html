@@ -10,7 +10,7 @@
   <meta property="og:image" content="https://insightfulminds.github.io/cold-start/diana-agency-os/images/hero-five-folders.png">
   <meta property="og:url" content="https://insightfulminds.github.io/cold-start/">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="data:,">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a0b0e'/><path d='M16 4L28 16L16 28L4 16Z' fill='none' stroke='%23e8a946' stroke-width='2'/><path d='M16 8L24 16L16 24L8 16Z' fill='%2314b8a6' opacity='0.7'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -466,6 +466,87 @@
       text-decoration: none;
     }
 
+    /* Scroll Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Header accent bar */
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--accent));
+      opacity: 0.6;
+    }
+
+    /* CTA pulse */
+    .hero-cta {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-cta::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      box-shadow: 0 0 0 0 var(--accent-glow);
+      animation: cta-pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes cta-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+      50% { box-shadow: 0 0 0 12px transparent; }
+    }
+
+    /* Card glow on hover */
+    .arch-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 0 0 1px var(--accent-soft);
+    }
+
+    .stat-card {
+      transition: all 0.3s;
+    }
+
+    .stat-card:hover {
+      border-color: var(--teal);
+      box-shadow: 0 4px 20px var(--teal-glow);
+    }
+
+    /* Test prompt box */
+    .test-prompt {
+      margin: 24px auto 28px;
+      max-width: 520px;
+      padding: 20px 24px;
+      border: 1px solid var(--teal);
+      border-radius: 10px;
+      background: var(--teal-soft);
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 14px;
+      color: var(--teal);
+      font-weight: 600;
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    .test-prompt::before {
+      content: '> ';
+      opacity: 0.5;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .shell { width: calc(100% - 32px); }
@@ -494,7 +575,7 @@
     <div class="shell">
       <div class="hero-badge">Clief Notes Weekly Comp #4</div>
       <h1>Diana's <span>Agency OS</span></h1>
-      <p class="hero-sub">It sounds like your team already knows the pain: a Spanish-speaking family calls, and someone scrambles to translate an email that should've been written in their language from the start. What if that wasn't a scramble anymore? Five Claude-ready folders. One shared handoff schema. Open the first folder and you'll notice the language, urgency, next owner, and fallback route are already carried forward.</p>
+      <p class="hero-sub">A Spanish-speaking family calls. Someone scrambles to rewrite the email in their language. It works &mdash; but it shouldn't be a scramble. Five Claude-ready folders. One handoff schema. Every specialist already knows the language, the owner, and where to route if things break.</p>
       <a href="https://github.com/InsightfulMinds/cold-start/tree/main/diana-agency-os/agency-system" class="hero-cta">
         Clone &amp; Run in 5 Minutes &rarr;
       </a>
@@ -503,7 +584,7 @@
   </div>
 
   <!-- Architecture -->
-  <section>
+  <section class="reveal">
     <div class="shell">
       <p class="section-label">The Team</p>
       <h2>Five Specialists. One Handoff Contract.</h2>
@@ -542,7 +623,7 @@
   </section>
 
   <!-- Handoff -->
-  <section>
+  <section class="reveal">
     <div class="shell">
       <p class="section-label">The Design Decision</p>
       <h2>Deals Don't Move Linearly</h2>
@@ -573,7 +654,7 @@
   </section>
 
   <!-- Bilingual -->
-  <section>
+  <section class="reveal">
     <div class="shell">
       <p class="section-label">Bilingual by Design</p>
       <h2>A bilingual buyer should not feel like an exception.</h2>
@@ -616,7 +697,7 @@
   </section>
 
   <!-- How It Was Built -->
-  <section>
+  <section class="reveal">
     <div class="shell">
       <p class="section-label">Behind the Build</p>
       <h2>3 hours. One real client pattern. Zero guesswork.</h2>
@@ -643,7 +724,7 @@
   </section>
 
   <!-- Competitive Edge -->
-  <section>
+  <section class="reveal">
     <div class="shell">
       <p class="section-label">Competitive Edge</p>
       <h2>The missing layer is deal health.</h2>
@@ -667,18 +748,18 @@
         </div>
 
         <div class="health-panel">
-          <h3>Why this is different</h3>
+          <h3>What travels with every handoff</h3>
           <div class="health-row">
-            <strong>Proof</strong>
-            <span>It is a shipped page plus cloneable folders, setup docs, schema, and sample operating flow.</span>
+            <strong>Language</strong>
+            <span>The Garc&iacute;as get reassurance in Spanish without anyone switching a settings menu.</span>
           </div>
           <div class="health-row">
-            <strong>Memory</strong>
-            <span>The memorable object is the handoff envelope: language, owner, status, and <code>back_to</code> in one place.</span>
+            <strong>Ownership</strong>
+            <span>Every open item has exactly one name next to it. No "who's handling this?" threads.</span>
           </div>
           <div class="health-row">
-            <strong>Vote</strong>
-            <span>The page answers the judge's quiet question: "Would a real agent actually trust this on a messy Tuesday?"</span>
+            <strong>Recovery</strong>
+            <span>When the lender slips, the <code>back_to</code> field already routes fallback comps &mdash; before anyone asks.</span>
           </div>
         </div>
       </div>
@@ -686,13 +767,13 @@
   </section>
 
   <!-- CTA -->
-  <section class="cta-section">
+  <section class="cta-section reveal">
     <div class="shell">
       <img src="diana-agency-os/images/dashboard-preview.png" alt="Dashboard Preview" class="section-image">
       <h2>You're probably wondering if this actually works.</h2>
-      <p>Here's how you find out. Clone the repo. Open the orchestrator. Paste this exact scenario and watch what happens:</p>
-      <p style="color: var(--teal); font-size: 14px; margin-bottom: 12px; font-weight: 600;">"Route this: new Spanish-speaking buyer inquiry, budget $400K, no pre-approval yet."</p>
-      <p style="color: var(--faint); font-size: 13px; margin-bottom: 32px;">Built from a real bilingual client engagement and packaged for a real estate team. If your team can't run this in 60 minutes without a phone call, the system failed.</p>
+      <p>Clone the repo. Open the orchestrator folder in Claude. Paste this:</p>
+      <div class="test-prompt">Route this: new Spanish-speaking buyer inquiry, budget $400K, Mueller area, no pre-approval yet, family needs to move before August.</div>
+      <p style="color: var(--faint); font-size: 13px; margin-bottom: 32px;">Watch it assign the case, detect the language, qualify the lead, and route the handoff &mdash; in under two minutes. Built from a real bilingual client engagement.</p>
       <a href="https://github.com/InsightfulMinds/cold-start/tree/main/diana-agency-os/agency-system" class="hero-cta">
         Clone &amp; Run Now &rarr;
       </a>
@@ -701,7 +782,7 @@
 
   <footer>
     <div class="shell">
-      cold-start &middot; Built by <a href="https://github.com/InsightfulMinds">InsightfulMinds</a> &middot; Deployable AI systems for small teams
+      cold-start &middot; Built by <a href="https://github.com/InsightfulMinds">InsightfulMinds</a> &middot; Claude Code + ICM Framework &middot; Clief Notes Weekly Comp #4
     </div>
   </footer>
 
@@ -721,6 +802,12 @@
       document.documentElement.setAttribute('data-theme', 'light');
       document.getElementById('themeIcon').textContent = '\u2600';
     }
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
