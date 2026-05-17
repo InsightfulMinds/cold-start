@@ -7,9 +7,9 @@ https://github.com/InsightfulMinds/cold-start/tree/main/diana-agency-os/agency-s
 
 Diana's Agency OS is a five-specialist ICM system — orchestrator, lead qualifier, property research, client communication, and transaction coordinator. A shared `HANDOFF_SCHEMA.md` at the root defines the envelope every specialist reads and writes so the contract can't drift between folders.
 
-Design decision: the `back_to` field in every handoff. Real estate deals don't move linearly — a lender delay routes back to comms, a stalled inspection routes back to research. The system is built for how deals actually move, not how a flowchart assumes.
+Design decision: the `back_to` field in every handoff. Real estate deals don't move linearly — a lender delay routes back to comms, a stalled inspection routes back to research. Built for how deals actually move, not how a flowchart assumes.
 
-One thing I'd add: a client intake form that auto-populates the first handoff envelope. No manual entry on first contact.
+One thing I'd add with another week: a client intake form that auto-populates the first handoff envelope from day one.
 
 ---
 
