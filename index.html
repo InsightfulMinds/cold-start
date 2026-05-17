@@ -70,6 +70,7 @@
       color: var(--text);
       font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.6;
+      overflow-x: hidden;
       transition: background 0.3s, color 0.3s;
       animation: page-fade-in 0.6s ease-out;
     }
@@ -166,7 +167,10 @@
     .hero-badge {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
       gap: 8px;
+      max-width: 100%;
       padding: 6px 14px;
       border: 1px solid var(--accent);
       border-radius: 999px;
@@ -179,6 +183,7 @@
       margin-bottom: 28px;
       position: relative;
       overflow: hidden;
+      text-align: center;
     }
 
     .hero-badge::after {
@@ -222,6 +227,10 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       animation: text-shimmer 4s ease-in-out infinite;
+    }
+
+    .mobile-break {
+      display: none;
     }
 
     @keyframes text-shimmer {
@@ -682,7 +691,10 @@
     .hero-proof {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
       gap: 6px;
+      max-width: 100%;
       margin-top: 16px;
       padding: 5px 12px;
       border-radius: 999px;
@@ -692,6 +704,7 @@
       font-size: 12px;
       font-weight: 600;
       opacity: 0.8;
+      text-align: center;
     }
 
     .hero-proof::before {
@@ -973,6 +986,57 @@
       font-size: 11px;
     }
 
+    .mini-window strong {
+      display: block;
+      color: var(--text);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .mini-window.active {
+      border-color: var(--teal);
+      box-shadow: inset 0 0 0 1px var(--teal-soft), 0 0 24px var(--teal-glow);
+    }
+
+    .runtime-feed {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .event-row {
+      display: grid;
+      grid-template-columns: 86px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: color-mix(in srgb, var(--bg) 68%, transparent);
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .event-row b {
+      color: var(--accent);
+      font-size: 10px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .event-row strong {
+      color: var(--text);
+      font-size: 11px;
+      overflow-wrap: anywhere;
+    }
+
+    .event-row em {
+      color: var(--teal);
+      font-style: normal;
+      white-space: nowrap;
+    }
+
     .drop-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1034,6 +1098,21 @@
       text-align: center;
       font-size: 12px;
       font-weight: 800;
+      transition: border-color 0.25s, background 0.25s, color 0.25s, transform 0.25s;
+    }
+
+    .connector-pad.online,
+    .connector-pad:hover {
+      border-color: var(--teal);
+      background: var(--teal-soft);
+      color: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    .connector-pad.armed {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
     }
 
     .connector-pad span {
@@ -2332,6 +2411,7 @@
       .ladder-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .aios-console { grid-template-columns: 1fr; }
       .control-pad, .connector-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .event-row { grid-template-columns: 1fr; }
       .dash-body { grid-template-columns: 1fr; }
       .dash-sidebar { display: none; }
       .dash-pipeline { grid-template-columns: repeat(2, 1fr); }
@@ -2345,7 +2425,9 @@
       .df-charts { grid-template-columns: 1fr; }
       .df-summary-row { grid-template-columns: 1fr; }
       section { padding: 56px 0; }
-      .hero h1 { font-size: 32px; }
+      .hero h1 { font-size: 30px; letter-spacing: 0; }
+      .hero-badge { border-radius: 10px; white-space: normal; line-height: 1.4; }
+      .hero-proof { border-radius: 10px; line-height: 1.4; }
       .test-prompt { font-size: 12px; padding: 16px; }
       .nav-dots { display: none; }
     }
@@ -2354,6 +2436,8 @@
       .shell { width: calc(100% - 24px); }
       .hero { padding: 48px 0 36px; }
       .hero-sub { font-size: 15px; }
+      .hero h1 { font-size: 28px; }
+      .mobile-break { display: block; }
       .stats-row { grid-template-columns: 1fr 1fr; }
       section h2 { font-size: 24px; }
       .arch-grid { grid-template-columns: 1fr; }
@@ -2396,7 +2480,7 @@
   <div class="hero" id="hero">
     <div class="shell">
       <div class="hero-badge">Clief Notes Weekly Comp #4 &mdash; Diana's Agency OS</div>
-      <h1>When the Deal Breaks,<br><span>the Packet Knows Who Owns It.</span></h1>
+      <h1>When the Deal <br class="mobile-break">Breaks,<br><span>the Packet Knows Who Owns It.</span></h1>
       <p class="hero-sub">A bilingual real estate OS that keeps language, owner, risk, and recovery path together when a buyer gets anxious, a lender slips, or an HOA detail has to go back to research.</p>
       <a href="https://github.com/InsightfulMinds/cold-start/tree/main/diana-agency-os/agency-system" class="hero-cta">
         Test the Stalled Deal &rarr;
@@ -3090,10 +3174,15 @@
           <div class="remote-snapshot">
             <div class="snapshot-header"><span>Remote view snapshot</span><span id="consoleState">Map mode: folder tree, vault notes, and client references become one navigable work surface.</span></div>
             <div class="snapshot-body">
-              <div class="mini-window">Mission Control<br>live board, agent state, next actions</div>
-              <div class="mini-window">Vault / Obsidian<br>local-first knowledge, backlinks, index</div>
-              <div class="mini-window">Device Layer<br>Mac, Mini, NAS/DAS, relay targets</div>
+              <div class="mini-window active" data-snapshot="map"><strong>Mission Control</strong>live board, agent state, next actions</div>
+              <div class="mini-window" data-snapshot="convert"><strong>Vault / Obsidian</strong>local-first knowledge, backlinks, index</div>
+              <div class="mini-window" data-snapshot="route"><strong>Device Layer</strong>Mac, Mini, NAS/DAS, relay targets</div>
             </div>
+          </div>
+          <div class="runtime-feed" aria-label="AIOS runtime event feed">
+            <div class="event-row"><b>08:17</b><strong>workspace/client folder mapped to proof index</strong><em>local only</em></div>
+            <div class="event-row"><b>08:18</b><strong>Spanish-first stalled-deal packet routed with back_to recovery</strong><em>ready</em></div>
+            <div class="event-row"><b>08:19</b><strong>public view stripped credentials, paths, and private notes</strong><em>safe</em></div>
           </div>
         </div>
         <div class="drop-panel">
@@ -3105,14 +3194,14 @@
             <div class="drop-zone" data-drop="connector"><strong>Connector file</strong><span>Drop an env bundle locally; keys stay off the page.</span><em class="drop-state">secret-safe preview only</em></div>
           </div>
           <div class="connector-grid" aria-label="Connector pads">
-            <div class="connector-pad">Make<span>webhooks</span></div>
-            <div class="connector-pad">Zapier<span>handoffs</span></div>
-            <div class="connector-pad">n8n<span>workflow import</span></div>
-            <div class="connector-pad">Gmail<span>inbox triage</span></div>
+            <div class="connector-pad online">Make<span>webhooks ready</span></div>
+            <div class="connector-pad">Zapier<span>handoffs staged</span></div>
+            <div class="connector-pad online">n8n<span>workflow import</span></div>
+            <div class="connector-pad armed">Gmail<span>permission gated</span></div>
             <div class="connector-pad">Drive<span>docs/sheets</span></div>
-            <div class="connector-pad">NAS / DAS<span>local storage</span></div>
-            <div class="connector-pad">Telegram<span>relay control</span></div>
-            <div class="connector-pad">AV / Home<span>device hooks</span></div>
+            <div class="connector-pad online">NAS / DAS<span>local storage</span></div>
+            <div class="connector-pad online">Telegram<span>relay control</span></div>
+            <div class="connector-pad armed">AV / Home<span>manual approve</span></div>
           </div>
           <div class="token-meter">
             <span class="token-label">Token budget</span>
@@ -3436,10 +3525,33 @@
 
     // AIOS console pad + local-only drop zones
     const consoleState = document.getElementById('consoleState');
+    const snapshotWindows = Array.from(document.querySelectorAll('[data-snapshot]'));
+    const runtimeFeed = document.querySelector('.runtime-feed');
+    const consoleModes = {
+      Map: { target: 'map', label: 'index map refreshed', status: 'mapped' },
+      Convert: { target: 'convert', label: 'source pile converted into handoff markdown', status: 'converted' },
+      Route: { target: 'route', label: 'packet route validated with back_to recovery', status: 'routed' },
+      Snapshot: { target: 'route', label: 'remote view redacted for public-safe proof', status: 'redacted' }
+    };
+    function appendRuntimeEvent(label, status) {
+      if (!runtimeFeed) return;
+      const now = new Date();
+      const stamp = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+      const row = document.createElement('div');
+      row.className = 'event-row';
+      row.innerHTML = `<b>${stamp}</b><strong>${label}</strong><em>${status}</em>`;
+      runtimeFeed.prepend(row);
+      Array.from(runtimeFeed.children).slice(4).forEach(node => node.remove());
+    }
     document.querySelectorAll('.pad-button').forEach(button => {
       button.addEventListener('click', () => {
         document.querySelectorAll('.pad-button').forEach(b => b.classList.toggle('active', b === button));
         if (consoleState) consoleState.textContent = button.dataset.console;
+        const mode = consoleModes[button.textContent.trim()];
+        if (mode) {
+          snapshotWindows.forEach(win => win.classList.toggle('active', win.dataset.snapshot === mode.target));
+          appendRuntimeEvent(mode.label, mode.status);
+        }
       });
     });
     document.querySelectorAll('.drop-zone').forEach(zone => {
@@ -3458,6 +3570,7 @@
           ? `${files.length} local item${files.length === 1 ? '' : 's'} mapped`
           : 'local path mapped';
         if (state) state.textContent = label;
+        appendRuntimeEvent(`${zone.dataset.drop} drop zone accepted ${label}`, 'local');
       });
     });
 
