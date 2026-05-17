@@ -107,7 +107,21 @@ Route this: new Spanish-speaking buyer inquiry, budget $400K, no pre-approval ye
    - Language set to `es`
    - A handoff envelope routing to `01_lead_qualifier`
 
-If you see that, you're ready. 
+If you see that, you're operational.
+
+### Bonus: Test the bilingual routing
+
+Paste this to confirm Spanish-first drafting works end-to-end:
+
+```
+Ruta esto: nueva familia, primera vez comprando casa, presupuesto $350K, zona Mueller, sin pre-aprobación.
+```
+
+The orchestrator should detect `language: es` automatically and route with Spanish context intact.
+
+### Shortcut: Auto-generate setup docs
+
+Run `./setup.sh` from the `diana-agency-os/` folder to auto-generate `STEP_BY_STEP.md`, `UPLOAD_BUNDLE.md`, and `HOW_TO_USE.md` in `.setup-output/`.
 
 ---
 
