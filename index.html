@@ -1089,11 +1089,30 @@
       transition: border-color 0.25s, background 0.25s, transform 0.25s;
     }
 
-    .drop-zone.dragging,
-    .drop-zone.mapped {
+    .drop-zone:hover {
+      border-color: var(--teal);
+      background: color-mix(in srgb, var(--teal-soft) 60%, transparent);
+      transform: translateY(-2px);
+    }
+
+    .drop-zone.dragging {
       border-color: var(--accent);
       background: var(--accent-soft);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 32px var(--accent-glow);
+      animation: drop-pulse 0.8s ease-in-out infinite;
+    }
+
+    .drop-zone.mapped {
+      border-color: var(--green);
+      border-style: solid;
+      background: var(--green-soft);
       transform: translateY(-2px);
+    }
+
+    @keyframes drop-pulse {
+      0%, 100% { box-shadow: 0 12px 32px var(--accent-glow); }
+      50% { box-shadow: 0 12px 48px var(--accent-glow), 0 0 0 4px var(--accent-soft); }
     }
 
     .drop-zone strong {
