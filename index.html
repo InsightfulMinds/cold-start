@@ -452,6 +452,111 @@
       font-size: 16px;
     }
 
+    /* Scroll Progress */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--accent));
+      z-index: 100;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* Card tilt perspective */
+    .arch-card {
+      transform-style: preserve-3d;
+      perspective: 800px;
+    }
+
+    /* Gradient mesh depth */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(ellipse, var(--teal-glow) 0%, transparent 60%);
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 60%);
+      opacity: 0.1;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .cta-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Social proof pill */
+    .hero-proof {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: var(--teal-soft);
+      border: 1px solid var(--teal);
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 600;
+      opacity: 0.8;
+    }
+
+    .hero-proof::before {
+      content: '\2713';
+      font-size: 10px;
+    }
+
+    /* Typing cursor */
+    .test-prompt .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--teal);
+      margin-left: 2px;
+      animation: blink 0.8s step-end infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* Handoff code line highlight */
+    .handoff-code .line {
+      display: block;
+      padding: 2px 0;
+      transition: background 0.3s;
+    }
+
+    .handoff-code .line:hover {
+      background: var(--accent-soft);
+      border-radius: 4px;
+    }
+
     /* Footer */
     footer {
       padding: 32px 0;
@@ -601,6 +706,7 @@
   </style>
 </head>
 <body>
+  <div class="scroll-progress" id="scrollProgress"></div>
   <header>
     <div class="shell header-inner">
       <a href="#" class="logo">
@@ -621,6 +727,7 @@
       <a href="https://github.com/InsightfulMinds/cold-start/tree/main/diana-agency-os/agency-system" class="hero-cta">
         Clone &amp; Run in 5 Minutes &rarr;
       </a>
+      <div class="hero-proof">Built from a real bilingual client engagement in Los Angeles</div>
       <img src="diana-agency-os/images/hero-five-folders.png" alt="Five Specialists Overview" class="hero-image">
     </div>
   </div>
@@ -660,7 +767,7 @@
         </div>
       </div>
 
-      <img src="diana-agency-os/images/architecture-flow.png" alt="Architecture Flow Diagram" class="section-image">
+      <img src="diana-agency-os/images/architecture-flow.png" alt="Architecture Flow Diagram" class="section-image" loading="lazy">
     </div>
   </section>
 
@@ -671,20 +778,20 @@
       <h2>Deals Don't Move Linearly</h2>
       <p class="section-desc">You've probably seen what happens when a deal stalls: it falls into a void. Nobody owns it. The <code>back_to</code> field means when something breaks, the system already knows who picks it up next and what context travels with it.</p>
 
-      <img src="diana-agency-os/images/handoff-envelope.png" alt="Handoff Envelope Visualization" class="section-image">
+      <img src="diana-agency-os/images/handoff-envelope.png" alt="Handoff Envelope Visualization" class="section-image" loading="lazy">
 
       <div class="handoff-visual">
         <div class="handoff-code">
-          <span class="key">case_id:</span> <span class="val">DIANA-20260515-007</span><br>
-          <span class="key">from:</span> <span class="val">04_transaction_coord</span><br>
-          <span class="key">to:</span> <span class="val">03_client_comms</span><br>
-          <span class="key">back_to:</span> <span class="val">02_property_research</span><br>
-          <span class="key">status:</span> <span class="val">stalled</span><br>
-          <span class="key">language:</span> <span class="val">es</span><br>
-          <br>
-          <span class="comment"># Lender pushed approval 10 days.</span><br>
-          <span class="comment"># Buyer needs reassurance in Spanish.</span><br>
-          <span class="comment"># If new comps needed, route back to research.</span>
+          <span class="line"><span class="key">case_id:</span> <span class="val">DIANA-20260515-007</span></span>
+          <span class="line"><span class="key">from:</span> <span class="val">04_transaction_coord</span></span>
+          <span class="line"><span class="key">to:</span> <span class="val">03_client_comms</span></span>
+          <span class="line"><span class="key">back_to:</span> <span class="val">02_property_research</span></span>
+          <span class="line"><span class="key">status:</span> <span class="val">stalled</span></span>
+          <span class="line"><span class="key">language:</span> <span class="val">es</span></span>
+          <span class="line">&nbsp;</span>
+          <span class="line"><span class="comment"># Lender pushed approval 10 days.</span></span>
+          <span class="line"><span class="comment"># Buyer needs reassurance in Spanish.</span></span>
+          <span class="line"><span class="comment"># If new comps needed, route back to research.</span></span>
         </div>
         <div class="handoff-explain">
           <h3>What happens when things go sideways?</h3>
@@ -702,7 +809,7 @@
       <h2>A bilingual buyer should not feel like an exception.</h2>
       <p class="section-desc">You already know this matters in Austin. The question isn't whether to support Spanish; it's whether your system makes it automatic or leaves it as one more thing someone has to remember. Here, the handoff envelope carries the language flag. Every specialist knows before they start drafting.</p>
 
-      <img src="diana-agency-os/images/bilingual-split.png" alt="Bilingual Communication Support" class="section-image">
+      <img src="diana-agency-os/images/bilingual-split.png" alt="Bilingual Communication Support" class="section-image" loading="lazy">
 
       <div class="bilingual-grid">
         <div class="lang-card">
@@ -719,19 +826,19 @@
 
       <div class="stats-row">
         <div class="stat-card">
-          <div class="stat-value">5</div>
+          <div class="stat-value" data-count="5">0</div>
           <div class="stat-label">Specialists</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">60 min</div>
+          <div class="stat-value" data-count="60" data-suffix=" min">0</div>
           <div class="stat-label">Onboarding</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">2</div>
+          <div class="stat-value" data-count="2">0</div>
           <div class="stat-label">Languages</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">0</div>
+          <div class="stat-value" data-count="0">0</div>
           <div class="stat-label">Logins Required</div>
         </div>
       </div>
@@ -746,19 +853,19 @@
       <p class="section-desc">This system wasn't designed in a vacuum. It's adapted from a bilingual insurance workflow where language gaps cost real opportunities, not hypothetical ones. Claude Code + the ICM framework. Everything you see here ships as files a small team can inspect, clone, and run.</p>
       <div class="stats-row">
         <div class="stat-card">
-          <div class="stat-value">1</div>
+          <div class="stat-value" data-count="1">0</div>
           <div class="stat-label">Handoff Schema</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">5</div>
+          <div class="stat-value" data-count="5">0</div>
           <div class="stat-label">Prompt Folders</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">3</div>
+          <div class="stat-value" data-count="3">0</div>
           <div class="stat-label">Setup Docs</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">0</div>
+          <div class="stat-value" data-count="0">0</div>
           <div class="stat-label">Hidden SaaS</div>
         </div>
       </div>
@@ -836,7 +943,7 @@
   <!-- CTA -->
   <section class="cta-section reveal">
     <div class="shell">
-      <img src="diana-agency-os/images/dashboard-preview.png" alt="Dashboard Preview" class="section-image">
+      <img src="diana-agency-os/images/dashboard-preview.png" alt="Dashboard Preview" class="section-image" loading="lazy">
       <h2>You're probably wondering if this actually works.</h2>
       <p>Clone the repo. Open the orchestrator folder in Claude. Paste this:</p>
       <div class="test-prompt">Route this: new Spanish-speaking buyer inquiry, budget $400K, Mueller area, no pre-approval yet, family needs to move before August.</div>
@@ -875,6 +982,75 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Scroll progress bar
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+      document.getElementById('scrollProgress').style.width = pct + '%';
+    }, { passive: true });
+
+    // Animated counters
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = parseInt(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        if (target === 0) { el.textContent = '0' + suffix; counterObserver.unobserve(el); return; }
+        let current = 0;
+        const step = Math.max(1, Math.ceil(target / 30));
+        const tick = () => {
+          current = Math.min(current + step, target);
+          el.textContent = current + suffix;
+          if (current < target) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+    // Typing animation for test prompt
+    const prompt = document.querySelector('.test-prompt');
+    if (prompt) {
+      const fullText = prompt.textContent.trim();
+      prompt.textContent = '';
+      const cursor = document.createElement('span');
+      cursor.className = 'cursor';
+      prompt.appendChild(cursor);
+      const typeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          let i = 0;
+          const type = () => {
+            if (i < fullText.length) {
+              cursor.before(fullText[i]);
+              i++;
+              setTimeout(type, 18 + Math.random() * 22);
+            } else {
+              setTimeout(() => cursor.remove(), 2000);
+            }
+          };
+          setTimeout(type, 400);
+          typeObserver.unobserve(prompt);
+        });
+      }, { threshold: 0.5 });
+      typeObserver.observe(prompt);
+    }
+
+    // Card tilt on hover
+    document.querySelectorAll('.arch-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width - 0.5) * 6;
+        const y = ((e.clientY - r.top) / r.height - 0.5) * -6;
+        card.style.transform = `perspective(800px) rotateY(${x}deg) rotateX(${y}deg) translateY(-2px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
   </script>
 </body>
 </html>
