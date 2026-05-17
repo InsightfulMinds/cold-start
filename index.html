@@ -3445,6 +3445,12 @@
   <footer>
     <div class="shell">
       <div class="footer-tagline">Focus on the problem. We solve. People happy.</div>
+      <div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;justify-content:center;">
+        <span style="display:inline-block;padding:3px 10px;border:1px solid var(--teal);border-radius:4px;color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;">40+ iterations</span>
+        <span style="display:inline-block;padding:3px 10px;border:1px solid var(--accent);border-radius:4px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;">3 agents</span>
+        <span style="display:inline-block;padding:3px 10px;border:1px solid var(--faint);border-radius:4px;color:var(--faint);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;">15 sections</span>
+        <span style="display:inline-block;padding:3px 10px;border:1px solid var(--green);border-radius:4px;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;">30+ dimensions</span>
+      </div><br>
       cold-start &middot; Built by <a href="https://github.com/InsightfulMinds">InsightfulMinds</a> &middot; Claude Code + ICM Framework &middot; Clief Notes Weekly Comp #4
     </div>
   </footer>
@@ -3863,16 +3869,16 @@
       lastScroll = y;
     }, { passive: true });
 
-    // Parallax on section images
-    const parallaxImages = document.querySelectorAll('.section-image, .hero-image');
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Parallax on framed media only; disabled on mobile to keep images stable.
+    const parallaxImages = document.querySelectorAll('.media-frame');
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && !window.matchMedia('(max-width: 768px)').matches) {
       window.addEventListener('scroll', () => {
         requestAnimationFrame(() => {
-          parallaxImages.forEach(img => {
-            const rect = img.getBoundingClientRect();
+          parallaxImages.forEach(frame => {
+            const rect = frame.getBoundingClientRect();
             if (rect.top < window.innerHeight && rect.bottom > 0) {
               const offset = (rect.top - window.innerHeight / 2) * 0.04;
-              img.style.transform = `translateY(${offset}px)`;
+              frame.style.transform = `translateY(${offset}px)`;
             }
           });
         });
