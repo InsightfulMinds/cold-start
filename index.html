@@ -83,7 +83,7 @@
       margin: 0 auto;
     }
 
-    /* Header */
+    /* Header — shrinks on scroll */
     header {
       position: sticky;
       top: 0;
@@ -92,6 +92,12 @@
       background: color-mix(in srgb, var(--bg) 80%, transparent);
       backdrop-filter: blur(20px) saturate(1.4);
       -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      transition: box-shadow 0.3s, padding 0.3s;
+    }
+
+    header.scrolled {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+      border-bottom-color: var(--accent-soft);
     }
 
     .header-inner {
@@ -99,6 +105,7 @@
       align-items: center;
       justify-content: space-between;
       min-height: 60px;
+      transition: min-height 0.3s;
     }
 
     .logo {
@@ -453,6 +460,10 @@
       position: relative;
     }
 
+    section {
+      --border-glow: 0;
+    }
+
     section::before {
       content: '';
       position: absolute;
@@ -462,6 +473,8 @@
       width: min(600px, 80%);
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--line), var(--teal-glow), var(--line), transparent);
+      opacity: calc(0.4 + var(--border-glow) * 0.6);
+      transition: opacity 0.6s;
     }
 
     /* Theme toggle glow */
@@ -3402,6 +3415,51 @@
         }
       }
     });
+
+    // Header shrink on scroll
+    const headerEl = document.querySelector('header');
+    const headerInner = document.querySelector('.header-inner');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y > 80) {
+        headerEl.classList.add('scrolled');
+        headerInner.style.minHeight = '48px';
+      } else {
+        headerEl.classList.remove('scrolled');
+        headerInner.style.minHeight = '';
+      }
+      lastScroll = y;
+    }, { passive: true });
+
+    // Parallax on section images
+    const parallaxImages = document.querySelectorAll('.section-image, .hero-image');
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      window.addEventListener('scroll', () => {
+        requestAnimationFrame(() => {
+          parallaxImages.forEach(img => {
+            const rect = img.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              const offset = (rect.top - window.innerHeight / 2) * 0.04;
+              img.style.transform = `translateY(${offset}px)`;
+            }
+          });
+        });
+      }, { passive: true });
+    }
+
+    // Smooth section border glow on scroll proximity
+    const allSections = document.querySelectorAll('section');
+    const glowObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.setProperty('--border-glow', '1');
+        } else {
+          e.target.style.setProperty('--border-glow', '0');
+        }
+      });
+    }, { threshold: 0.05 });
+    allSections.forEach(s => glowObserver.observe(s));
 
     // Dashboard live clock
     const dashClock = document.getElementById('dashClock');
