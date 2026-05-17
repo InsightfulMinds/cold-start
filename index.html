@@ -2119,15 +2119,25 @@
       text-decoration: none;
     }
 
-    /* Scroll Animations */
+    /* Scroll Animations — buttery reveals */
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(28px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
     }
 
     .reveal.visible {
       opacity: 1;
+      transform: none;
+    }
+
+    /* Alternate sections slide from different directions */
+    .reveal:nth-of-type(even) {
+      transform: translateY(28px) translateX(-12px);
+    }
+
+    .reveal:nth-of-type(even).visible {
       transform: none;
     }
 
@@ -3443,6 +3453,20 @@
         }
       }
     });
+
+    // Smooth background tint shift based on scroll (dark → slightly warm → dark)
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const body = document.body;
+      window.addEventListener('scroll', () => {
+        requestAnimationFrame(() => {
+          const h = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = h > 0 ? window.scrollY / h : 0;
+          // Subtle warm tint in the middle 30-70% of the page
+          const warmth = Math.sin(progress * Math.PI) * 0.02;
+          body.style.background = `color-mix(in srgb, var(--bg) ${100 - warmth * 100}%, #1a1408)`;
+        });
+      }, { passive: true });
+    }
 
     // Header shrink on scroll
     const headerEl = document.querySelector('header');
