@@ -704,6 +704,324 @@
       border-radius: 4px;
     }
 
+    /* Handoff replay */
+    .replay-card {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(260px, 1.1fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 28px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--panel) 0%, var(--panel-2) 100%);
+    }
+
+    .replay-steps {
+      display: grid;
+      gap: 8px;
+    }
+
+    .replay-step {
+      width: 100%;
+      text-align: left;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--panel) 82%, transparent);
+      color: var(--muted);
+      font: inherit;
+      cursor: pointer;
+      transition: border-color 0.25s, background 0.25s, color 0.25s, transform 0.25s;
+    }
+
+    .replay-step strong {
+      display: block;
+      color: var(--text);
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    .replay-step span {
+      font-size: 12px;
+    }
+
+    .replay-step.active {
+      border-color: var(--teal);
+      background: var(--teal-soft);
+      color: var(--teal);
+      transform: translateX(4px);
+    }
+
+    .packet-status {
+      display: grid;
+      align-content: center;
+      gap: 12px;
+      min-height: 100%;
+      padding: 20px;
+      border: 1px solid var(--teal);
+      border-radius: 10px;
+      background:
+        radial-gradient(circle at top right, var(--teal-glow), transparent 42%),
+        var(--bg);
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+    }
+
+    .packet-status .label {
+      color: var(--faint);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .packet-status .value {
+      color: var(--teal);
+      font-size: 15px;
+      overflow-wrap: anywhere;
+    }
+
+    /* Week ladder + AIOS console */
+    .ladder-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .ladder-card {
+      min-height: 210px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--panel) 0%, var(--panel-2) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ladder-card::after {
+      content: '';
+      position: absolute;
+      inset: auto 18px 18px auto;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--teal-glow), transparent 70%);
+    }
+
+    .ladder-card .week {
+      color: var(--accent);
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .ladder-card h3 {
+      margin: 12px 0 8px;
+      font-size: 18px;
+    }
+
+    .ladder-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .aios-console {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 34px;
+    }
+
+    .console-panel,
+    .drop-panel {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at top left, var(--teal-glow), transparent 35%),
+        linear-gradient(135deg, var(--panel) 0%, var(--panel-2) 100%);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    }
+
+    .console-topline,
+    .panel-kicker {
+      color: var(--accent);
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .state-tile {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--bg) 70%, transparent);
+    }
+
+    .state-tile span {
+      display: block;
+      color: var(--faint);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+    }
+
+    .state-tile strong {
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .control-pad {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .pad-button {
+      min-height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--muted);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: border-color 0.25s, color 0.25s, transform 0.25s, background 0.25s;
+    }
+
+    .pad-button.active,
+    .pad-button:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      background: var(--teal-soft);
+      transform: translateY(-2px);
+    }
+
+    .remote-snapshot {
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #05070a;
+    }
+
+    .snapshot-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      color: var(--faint);
+      font-size: 11px;
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+    }
+
+    .snapshot-body {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .mini-window {
+      min-height: 72px;
+      border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(20,184,166,0.14), transparent),
+        var(--panel);
+      padding: 10px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .drop-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .drop-zone {
+      min-height: 128px;
+      padding: 16px;
+      border: 1px dashed color-mix(in srgb, var(--teal) 70%, var(--line));
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--teal-soft) 45%, transparent);
+      color: var(--muted);
+      cursor: default;
+      transition: border-color 0.25s, background 0.25s, transform 0.25s;
+    }
+
+    .drop-zone.dragging,
+    .drop-zone.mapped {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      transform: translateY(-2px);
+    }
+
+    .drop-zone strong {
+      display: block;
+      color: var(--text);
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .drop-zone span {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .drop-state {
+      display: inline-block;
+      color: var(--teal);
+      font-size: 11px;
+      font-style: normal;
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+    }
+
+    .connector-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .connector-pad {
+      padding: 12px 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--bg) 74%, transparent);
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .connector-pad span {
+      display: block;
+      color: var(--faint);
+      font-weight: 600;
+      font-size: 10px;
+      margin-top: 4px;
+    }
+
     /* Floating nav dots */
     .nav-dots {
       position: fixed;
@@ -798,7 +1116,7 @@
     }
 
     /* Staggered card cascade */
-    .arch-card, .stat-card, .lang-card, .health-panel {
+    .arch-card, .stat-card, .lang-card, .health-panel, .ladder-card, .drop-zone, .connector-pad {
       opacity: 0;
       transform: translateY(16px);
       transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -807,7 +1125,10 @@
     .reveal.visible .arch-card,
     .reveal.visible .stat-card,
     .reveal.visible .lang-card,
-    .reveal.visible .health-panel {
+    .reveal.visible .health-panel,
+    .reveal.visible .ladder-card,
+    .reveal.visible .drop-zone,
+    .reveal.visible .connector-pad {
       opacity: 1;
       transform: none;
     }
@@ -820,7 +1141,7 @@
 
     /* Accessibility */
     @media (prefers-reduced-motion: reduce) {
-      .reveal, .arch-card, .stat-card, .lang-card, .health-panel {
+      .reveal, .arch-card, .stat-card, .lang-card, .health-panel, .ladder-card, .drop-zone, .connector-pad {
         opacity: 1;
         transform: none;
         transition: none;
@@ -920,6 +1241,10 @@
       .handoff-visual { grid-template-columns: 1fr; }
       .bilingual-grid { grid-template-columns: 1fr; }
       .deal-health { grid-template-columns: 1fr; }
+      .replay-card { grid-template-columns: 1fr; }
+      .ladder-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .aios-console { grid-template-columns: 1fr; }
+      .control-pad, .connector-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       section { padding: 56px 0; }
       .hero h1 { font-size: 32px; }
       .test-prompt { font-size: 12px; padding: 16px; }
@@ -933,6 +1258,7 @@
       .stats-row { grid-template-columns: 1fr 1fr; }
       section h2 { font-size: 24px; }
       .arch-grid { grid-template-columns: 1fr; }
+      .ladder-grid, .drop-grid, .state-grid, .snapshot-body { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -940,15 +1266,17 @@
   <canvas id="particles"></canvas>
   <div class="scroll-progress" id="scrollProgress"></div>
   <nav class="nav-dots" id="navDots">
-    <button class="nav-dot active" data-target="hero" data-label="Home"></button>
-    <button class="nav-dot" data-target="team" data-label="Team"></button>
-    <button class="nav-dot" data-target="handoff" data-label="Handoff"></button>
-    <button class="nav-dot" data-target="bilingual" data-label="Bilingual"></button>
-    <button class="nav-dot" data-target="build" data-label="Build"></button>
-    <button class="nav-dot" data-target="edge" data-label="Edge"></button>
-    <button class="nav-dot" data-target="deploy" data-label="Deploy"></button>
-    <button class="nav-dot" data-target="output" data-label="Output"></button>
-    <button class="nav-dot" data-target="cta" data-label="Try It"></button>
+    <button class="nav-dot active" data-target="hero" data-label="Home" aria-label="Jump to Home"></button>
+    <button class="nav-dot" data-target="team" data-label="Team" aria-label="Jump to Team"></button>
+    <button class="nav-dot" data-target="handoff" data-label="Handoff" aria-label="Jump to Handoff"></button>
+    <button class="nav-dot" data-target="bilingual" data-label="Bilingual" aria-label="Jump to Bilingual"></button>
+    <button class="nav-dot" data-target="build" data-label="Build" aria-label="Jump to Build"></button>
+    <button class="nav-dot" data-target="edge" data-label="Edge" aria-label="Jump to Edge"></button>
+    <button class="nav-dot" data-target="deploy" data-label="Deploy" aria-label="Jump to Deploy"></button>
+    <button class="nav-dot" data-target="output" data-label="Output" aria-label="Jump to Output"></button>
+    <button class="nav-dot" data-target="ladder" data-label="Ladder" aria-label="Jump to Ladder"></button>
+    <button class="nav-dot" data-target="aios" data-label="AIOS" aria-label="Jump to AIOS"></button>
+    <button class="nav-dot" data-target="cta" data-label="Try It" aria-label="Jump to Try It"></button>
   </nav>
   <header>
     <div class="shell header-inner">
@@ -1212,6 +1540,128 @@
         <span class="line"><span class="key">"status":</span> <span class="val">"new"</span>,</span>
         <span class="line"><span class="key">"next_action":</span> <span class="val">"Qualify budget, timeline, motivation. Flag pre-approval gap."</span></span>
       </div>
+      <div class="replay-card" aria-label="Stalled deal handoff replay">
+        <div class="replay-steps">
+          <button class="replay-step active" type="button" data-owner="00_orchestrator" data-route="01_lead_qualifier" data-risk="Spanish-first inquiry, pre-approval missing" data-status="new">
+            <strong>1. Intake lands</strong>
+            <span>Language and owner are set before anyone writes.</span>
+          </button>
+          <button class="replay-step" type="button" data-owner="01_lead_qualifier" data-route="02_property_research" data-risk="Budget fit, school-year deadline" data-status="qualified">
+            <strong>2. Lead is qualified</strong>
+            <span>Timeline and motivation travel with the case.</span>
+          </button>
+          <button class="replay-step" type="button" data-owner="02_property_research" data-route="03_client_comms" data-risk="HOA ambiguity blocks safe advice" data-status="needs verification">
+            <strong>3. Research finds friction</strong>
+            <span>The system refuses to fake certainty.</span>
+          </button>
+          <button class="replay-step" type="button" data-owner="03_client_comms" data-route="02_property_research" data-risk="Client anxious, answer not source-verified" data-status="back_to triggered">
+            <strong>4. Deal moves backward</strong>
+            <span>Comms sends reassurance; facts return to research.</span>
+          </button>
+        </div>
+        <div class="packet-status" aria-live="polite">
+          <div>
+            <div class="label">Current owner</div>
+            <div class="value" id="replayOwner">00_orchestrator</div>
+          </div>
+          <div>
+            <div class="label">Route / back_to</div>
+            <div class="value" id="replayRoute">01_lead_qualifier</div>
+          </div>
+          <div>
+            <div class="label">Risk carried forward</div>
+            <div class="value" id="replayRisk">Spanish-first inquiry, pre-approval missing</div>
+          </div>
+          <div>
+            <div class="label">Status</div>
+            <div class="value" id="replayStatus">new</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Competition Ladder -->
+  <section class="reveal" id="ladder">
+    <div class="shell">
+      <p class="section-label">Week 1-3 Pattern</p>
+      <h2>The bar kept moving. This build moves past it.</h2>
+      <p class="section-desc">The early winners did not stop at the assignment. They turned docs into sites, artifacts into apps, and folders into products. Diana's OS adds the next layer: a visible runtime surface for state, flow, connectors, and proof.</p>
+      <div class="ladder-grid">
+        <article class="ladder-card">
+          <div class="week">Week 1</div>
+          <h3>Doc became a site.</h3>
+          <p>The lesson was packaging. A stranger should be able to land cold and know what to do next.</p>
+        </article>
+        <article class="ladder-card">
+          <div class="week">Week 2</div>
+          <h3>Artifact became intake.</h3>
+          <p>The lesson was emotional context. The system has to understand the human before the fields.</p>
+        </article>
+        <article class="ladder-card">
+          <div class="week">Week 3</div>
+          <h3>Folder became product.</h3>
+          <p>The lesson was legitimacy. Folder structure needs a product wrapper judges can use in seconds.</p>
+        </article>
+        <article class="ladder-card">
+          <div class="week">Week 4+</div>
+          <h3>Product becomes operating layer.</h3>
+          <p>The next jump is state, conversion, connectors, remote view, and token-aware routing without giving away the internals.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- AIOS Console -->
+  <section class="reveal" id="aios">
+    <div class="shell">
+      <p class="section-label">AIOS Layer</p>
+      <h2>The hidden advantage: it is not just folders. It is an operating console.</h2>
+      <p class="section-desc">This is the secret-safe surface area: drag in context, map folders, convert messy assets, connect tools, and keep the agent inside a workspace the human already owns.</p>
+      <div class="aios-console">
+        <div class="console-panel">
+          <div class="console-topline">AIOS control surface / public view</div>
+          <div class="state-grid">
+            <div class="state-tile"><span>State</span><strong>packet, owner, risk, deadline</strong></div>
+            <div class="state-tile"><span>Flow</span><strong>forward route + back_to recovery</strong></div>
+            <div class="state-tile"><span>Index</span><strong>folder map, vault map, proof map</strong></div>
+            <div class="state-tile"><span>Budget</span><strong>token-aware model routing</strong></div>
+          </div>
+          <div class="control-pad" aria-label="AIOS mode selector">
+            <button class="pad-button active" type="button" data-console="Map mode: folder tree, vault notes, and client references become one navigable work surface.">Map</button>
+            <button class="pad-button" type="button" data-console="Convert mode: PDFs, docs, transcripts, images, and notes become markdown or HTML handoff artifacts.">Convert</button>
+            <button class="pad-button" type="button" data-console="Route mode: agents inherit the right context, write the next packet, and preserve the return path.">Route</button>
+            <button class="pad-button" type="button" data-console="Snapshot mode: remote machines, open tasks, and visible workspaces get summarized without leaking credentials.">Snapshot</button>
+          </div>
+          <div class="remote-snapshot">
+            <div class="snapshot-header"><span>Remote view snapshot</span><span id="consoleState">Map mode: folder tree, vault notes, and client references become one navigable work surface.</span></div>
+            <div class="snapshot-body">
+              <div class="mini-window">Mission Control<br>live board, agent state, next actions</div>
+              <div class="mini-window">Vault / Obsidian<br>local-first knowledge, backlinks, index</div>
+              <div class="mini-window">Device Layer<br>Mac, Mini, NAS/DAS, relay targets</div>
+            </div>
+          </div>
+        </div>
+        <div class="drop-panel">
+          <div class="panel-kicker">Drag-and-drop install surface</div>
+          <div class="drop-grid">
+            <div class="drop-zone" data-drop="workspace"><strong>Workspace folder</strong><span>Drop a client folder, repo, or Obsidian vault path.</span><em class="drop-state">waiting for local path</em></div>
+            <div class="drop-zone" data-drop="source"><strong>Source pile</strong><span>Drop PDFs, docs, transcripts, screenshots, or call notes.</span><em class="drop-state">anything to MD / HTML</em></div>
+            <div class="drop-zone" data-drop="skill"><strong>Skill builder</strong><span>Drop a repeatable workflow and map it into an agent-ready skill.</span><em class="drop-state">folder mapper ready</em></div>
+            <div class="drop-zone" data-drop="connector"><strong>Connector file</strong><span>Drop an env bundle locally; keys stay off the page.</span><em class="drop-state">secret-safe preview only</em></div>
+          </div>
+          <div class="connector-grid" aria-label="Connector pads">
+            <div class="connector-pad">Make<span>webhooks</span></div>
+            <div class="connector-pad">Zapier<span>handoffs</span></div>
+            <div class="connector-pad">n8n<span>workflow import</span></div>
+            <div class="connector-pad">Gmail<span>inbox triage</span></div>
+            <div class="connector-pad">Drive<span>docs/sheets</span></div>
+            <div class="connector-pad">NAS / DAS<span>local storage</span></div>
+            <div class="connector-pad">Telegram<span>relay control</span></div>
+            <div class="connector-pad">AV / Home<span>device hooks</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1400,10 +1850,12 @@
       draw();
     })();
 
-    // Keyboard navigation (arrow keys between sections)
-    const navSections = ['hero','team','handoff','bilingual','build','edge','deploy','output','cta'];
+    // Keyboard navigation (Alt + arrow keys between sections)
+    const navSections = ['hero','team','handoff','bilingual','build','edge','deploy','output','ladder','aios','cta'];
     let currentSection = 0;
     document.addEventListener('keydown', e => {
+      if (!e.altKey || e.metaKey || e.ctrlKey) return;
+      if (['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON', 'A'].includes(document.activeElement?.tagName)) return;
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
         e.preventDefault();
         currentSection = Math.min(currentSection + 1, navSections.length - 1);
@@ -1413,6 +1865,58 @@
         currentSection = Math.max(currentSection - 1, 0);
         document.getElementById(navSections[currentSection])?.scrollIntoView({ behavior: 'smooth' });
       }
+    });
+
+    // Stalled-deal replay
+    const replaySteps = Array.from(document.querySelectorAll('.replay-step'));
+    const replayFields = {
+      owner: document.getElementById('replayOwner'),
+      route: document.getElementById('replayRoute'),
+      risk: document.getElementById('replayRisk'),
+      status: document.getElementById('replayStatus')
+    };
+    let replayIndex = 0;
+    function setReplayStep(step) {
+      replaySteps.forEach(s => s.classList.toggle('active', s === step));
+      replayFields.owner.textContent = step.dataset.owner;
+      replayFields.route.textContent = step.dataset.route;
+      replayFields.risk.textContent = step.dataset.risk;
+      replayFields.status.textContent = step.dataset.status;
+      replayIndex = replaySteps.indexOf(step);
+    }
+    replaySteps.forEach(step => step.addEventListener('click', () => setReplayStep(step)));
+    if (replaySteps.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setInterval(() => {
+        const next = replaySteps[(replayIndex + 1) % replaySteps.length];
+        setReplayStep(next);
+      }, 3600);
+    }
+
+    // AIOS console pad + local-only drop zones
+    const consoleState = document.getElementById('consoleState');
+    document.querySelectorAll('.pad-button').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.pad-button').forEach(b => b.classList.toggle('active', b === button));
+        if (consoleState) consoleState.textContent = button.dataset.console;
+      });
+    });
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+      const state = zone.querySelector('.drop-state');
+      zone.addEventListener('dragover', event => {
+        event.preventDefault();
+        zone.classList.add('dragging');
+      });
+      zone.addEventListener('dragleave', () => zone.classList.remove('dragging'));
+      zone.addEventListener('drop', event => {
+        event.preventDefault();
+        zone.classList.remove('dragging');
+        zone.classList.add('mapped');
+        const files = Array.from(event.dataTransfer?.files || []);
+        const label = files.length
+          ? `${files.length} local item${files.length === 1 ? '' : 's'} mapped`
+          : 'local path mapped';
+        if (state) state.textContent = label;
+      });
     });
 
     // Easter egg: press 'D' for Diana mode (confetti burst)
