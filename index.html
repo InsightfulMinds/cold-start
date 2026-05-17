@@ -616,6 +616,7 @@
       pointer-events: none;
       z-index: -1;
       opacity: 0.4;
+      contain: strict;
     }
 
     /* Section anchors for smooth nav */
@@ -680,6 +681,25 @@
       .hero-cta::after { animation: none; }
     }
 
+    /* CTA pulse — always visible to draw attention */
+    .hero-cta {
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 0 0 var(--accent-glow);
+      animation: cta-pulse 2.5s ease-in-out infinite;
+    }
+
+    .hero-cta::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+    }
+
+    @keyframes cta-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+      50% { box-shadow: 0 0 0 12px var(--accent-glow); }
+    }
     /* Header accent bar */
     header::after {
       content: '';
@@ -692,25 +712,22 @@
       opacity: 0.6;
     }
 
-    /* CTA pulse */
-    .hero-cta {
-      position: relative;
-      overflow: hidden;
-    }
 
-    .hero-cta::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 8px;
-      box-shadow: 0 0 0 0 var(--accent-glow);
-      animation: cta-pulse 2.5s ease-in-out infinite;
-    }
 
-    @keyframes cta-pulse {
-      0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
-      50% { box-shadow: 0 0 0 12px transparent; }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /* Card glow on hover */
     .arch-card:hover {
@@ -805,7 +822,7 @@
         Clone &amp; Run in 5 Minutes &rarr;
       </a>
       <div class="hero-proof">Built from a real bilingual client engagement in Los Angeles</div>
-      <img src="diana-agency-os/images/hero-five-folders.png" alt="Five Specialists Overview" class="hero-image">
+      <img src="diana-agency-os/images/hero-five-folders.png" alt="Five Specialists Overview" class="hero-image" width="1080" height="608">
     </div>
   </div>
 
@@ -844,7 +861,7 @@
         </div>
       </div>
 
-      <img src="diana-agency-os/images/architecture-flow.png" alt="Architecture Flow Diagram" class="section-image" loading="lazy">
+      <img src="diana-agency-os/images/architecture-flow.png" alt="Architecture Flow Diagram" class="section-image" loading="lazy" width="1080" height="480">
     </div>
   </section>
 
@@ -855,7 +872,7 @@
       <h2>Deals Don't Move Linearly</h2>
       <p class="section-desc">You've probably seen what happens when a deal stalls: it falls into a void. Nobody owns it. The <code>back_to</code> field means when something breaks, the system already knows who picks it up next and what context travels with it.</p>
 
-      <img src="diana-agency-os/images/handoff-envelope.png" alt="Handoff Envelope Visualization" class="section-image" loading="lazy">
+      <img src="diana-agency-os/images/handoff-envelope.png" alt="Handoff Envelope Visualization" class="section-image" loading="lazy" width="1080" height="480">
 
       <div class="handoff-visual">
         <div class="handoff-code">
@@ -886,7 +903,7 @@
       <h2>A bilingual buyer should not feel like an exception.</h2>
       <p class="section-desc">You already know this matters in Austin. The question isn't whether to support Spanish; it's whether your system makes it automatic or leaves it as one more thing someone has to remember. Here, the handoff envelope carries the language flag. Every specialist knows before they start drafting.</p>
 
-      <img src="diana-agency-os/images/bilingual-split.png" alt="Bilingual Communication Support" class="section-image" loading="lazy">
+      <img src="diana-agency-os/images/bilingual-split.png" alt="Bilingual Communication Support" class="section-image" loading="lazy" width="1080" height="480">
 
       <div class="bilingual-grid">
         <div class="lang-card">
@@ -927,7 +944,17 @@
     <div class="shell">
       <p class="section-label">Behind the Build</p>
       <h2>3 hours. One real client pattern. Zero guesswork.</h2>
-      <p class="section-desc">This system wasn't designed in a vacuum. It's adapted from a bilingual insurance workflow where language gaps cost real opportunities, not hypothetical ones. Claude Code + the ICM framework. Everything you see here ships as files a small team can inspect, clone, and run.</p>
+      <p class="section-desc">This system wasn't designed in a vacuum. It's adapted from a bilingual insurance workflow where language gaps cost real opportunities, not hypothetical ones. Claude Code + the ICM framework. Everything ships as files you can inspect.</p>
+      <div class="handoff-code" style="max-width: 420px; margin-bottom: 32px; font-size: 12px; line-height: 1.8;">
+        <span class="line"><span class="val">diana-agency-os/</span></span>
+        <span class="line">&nbsp; <span class="key">00_orchestrator/</span> <span class="comment">system.txt, schema.json</span></span>
+        <span class="line">&nbsp; <span class="key">01_lead_qualifier/</span> <span class="comment">system.txt, examples.md</span></span>
+        <span class="line">&nbsp; <span class="key">02_property_research/</span> <span class="comment">system.txt, comps.md</span></span>
+        <span class="line">&nbsp; <span class="key">03_client_comms/</span> <span class="comment">system.txt, templates/</span></span>
+        <span class="line">&nbsp; <span class="key">04_transaction_coord/</span> <span class="comment">system.txt, checklists/</span></span>
+        <span class="line">&nbsp; <span class="val">handoff-schema.json</span></span>
+        <span class="line">&nbsp; <span class="val">QUICK_START.md</span></span>
+      </div>
       <div class="stats-row">
         <div class="stat-card">
           <div class="stat-value" data-count="1">0</div>
@@ -953,7 +980,7 @@
   <section class="reveal" id="edge">
     <div class="shell">
       <p class="section-label">Competitive Edge</p>
-      <h2>The missing layer is deal health.</h2>
+      <h2>What wins: deal health the system sees before the deal dies.</h2>
       <p class="section-desc">Most entries can route a task forward. Diana's Agency OS shows what happens when the deal is no longer clean: who owns the stall, who drafts the client message, and whether the team has capacity to recover before the buyer loses trust.</p>
 
       <div class="deal-health">
@@ -996,7 +1023,7 @@
   <section class="reveal" id="deploy">
     <div class="shell" style="text-align: center;">
       <p class="section-label">Get Running</p>
-      <h2>Three commands. No accounts.</h2>
+      <h2>Three steps. No accounts. No approvals.</h2>
       <div class="arch-grid" style="margin-top: 40px;">
         <div class="arch-card" style="text-align: left;">
           <div class="arch-card-icon router" style="font-weight: 900; font-size: 14px;">1</div>
@@ -1006,12 +1033,12 @@
         <div class="arch-card" style="text-align: left;">
           <div class="arch-card-icon intake" style="font-weight: 900; font-size: 14px;">2</div>
           <h3>Open in Claude</h3>
-          <p>Drag any specialist folder into a Claude Project. The system prompt is already written.</p>
+          <p>Drag any specialist folder into a Claude Project. The system prompt is already written — no editing required before your first deal moves.</p>
         </div>
         <div class="arch-card" style="text-align: left;">
           <div class="arch-card-icon comms" style="font-weight: 900; font-size: 14px;">3</div>
           <h3>Run a deal</h3>
-          <p>Paste a client scenario. Watch the handoff schema route it through all five specialists.</p>
+          <p>Paste a client scenario. Within two minutes, you'll see whether this actually works for your team. The handoff schema handles the routing — you focus on the result.</p>
         </div>
       </div>
     </div>
@@ -1020,13 +1047,13 @@
   <!-- CTA -->
   <section class="cta-section reveal" id="cta">
     <div class="shell">
-      <img src="diana-agency-os/images/dashboard-preview.png" alt="Dashboard Preview" class="section-image" loading="lazy">
-      <h2>You're probably wondering if this actually works.</h2>
-      <p>Clone the repo. Open the orchestrator folder in Claude. Paste this:</p>
+      <img src="diana-agency-os/images/dashboard-preview.png" alt="Dashboard Preview" class="section-image" loading="lazy" width="1080" height="540">
+      <h2>The real test: does your team lose deals when bilingual clients call?</h2>
+      <p>Clone the repo. Open the orchestrator. Paste this and watch what happens:</p>
       <div class="test-prompt">Route this: new Spanish-speaking buyer inquiry, budget $400K, Mueller area, no pre-approval yet, family needs to move before August.</div>
       <p style="color: var(--faint); font-size: 13px; margin-bottom: 32px;">Watch it assign the case, detect the language, qualify the lead, and route the handoff &mdash; in under two minutes. Built from a real bilingual client engagement.</p>
-      <a href="https://github.com/InsightfulMinds/cold-start/tree/main/diana-agency-os/agency-system" class="hero-cta">
-        Clone &amp; Run Now &rarr;
+      <a href="https://github.com/InsightfulMinds/cold-start/tree/main/diana-agency-os/agency-system" class="hero-cta" style="background: transparent; border: 2px solid var(--teal); color: var(--teal);">
+        Open the Repo &rarr;
       </a>
     </div>
   </section>
@@ -1060,11 +1087,18 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Scroll progress bar
+    // Scroll progress bar (throttled)
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
-      document.getElementById('scrollProgress').style.width = pct + '%';
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          const h = document.documentElement.scrollHeight - window.innerHeight;
+          const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+          document.getElementById('scrollProgress').style.width = pct + '%';
+          ticking = false;
+        });
+      }
     }, { passive: true });
 
     // Animated counters
@@ -1148,7 +1182,7 @@
       document.getElementById(d.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
     }));
 
-    // Ambient particles
+    // Ambient particles (reduced on mobile for perf)
     (function() {
       const c = document.getElementById('particles');
       const ctx = c.getContext('2d');
@@ -1157,7 +1191,8 @@
       resize();
       window.addEventListener('resize', resize);
       const teal = [20, 184, 166], amber = [232, 169, 70];
-      for (let i = 0; i < 40; i++) {
+      const particleCount = window.innerWidth < 768 ? 12 : 40;
+      for (let i = 0; i < particleCount; i++) {
         const col = Math.random() > 0.5 ? teal : amber;
         pts.push({ x: Math.random()*w, y: Math.random()*h, r: Math.random()*1.5+0.5, dx: (Math.random()-0.5)*0.3, dy: (Math.random()-0.5)*0.3, col });
       }
