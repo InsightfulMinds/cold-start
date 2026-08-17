@@ -6,7 +6,7 @@ Deployable AI operating systems for small teams. Each folder is a self-contained
 
 | Folder | Client | Context |
 |---|---|---|
-| [diana-agency-os](./diana-agency-os/) | Diana — boutique real estate team, Austin TX | Clief Notes Weekly Comp #4 |
+| [diana-agency-os](./diana-agency-os/) | Diana — boutique real estate team, Austin TX | Client deployment |
 
 ## Philosophy
 
